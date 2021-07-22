@@ -1,6 +1,6 @@
 import './Header.css';
 import logo from '../../images/logo.svg';
-import close from '../../images/close.svg';
+// import close from '../../images/close.svg';
 import profile from '../../images/profile.svg';
 import { Link } from 'react-router-dom';
 import React from 'react';
