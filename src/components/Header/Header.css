@@ -1,0 +1,175 @@
+.header {
+    padding: 18px 0;
+}
+
+.header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #000;
+    height: 1024px;
+    z-index: 3;
+    opacity: 0.3;
+    display: none;
+}
+
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 520px;
+    height: 1024px;
+    background-color: #fff;
+    z-index: 5;
+    display: none;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-burgerMenu {
+    position: absolute;
+    background-color: #000;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    top: 10px;
+}
+
+.header-burger {
+    display: block;
+    position: relative;
+    width: 28px;
+    height: 23px;
+}
+
+.header-burger:hover {
+    cursor: pointer;
+}
+
+.header-burger::before,
+.header-burger::after {
+    content: '';
+    position: absolute;
+    background-color: #000;
+    width: 100%;
+    height: 2px;
+    left: 0;
+}
+
+.header-burger::before {
+    top: 0;
+}
+
+.header-burger::after {
+    bottom: 0;
+}
+
+.header-burgerText {
+    position: absolute;
+    z-index: 10;
+    margin: 0;
+    width: 340px;
+    text-align: center;
+    right: 90px;
+    font-family: 'Inter', 'Arial', 'Helvetica';
+    font-size: 13px;
+    line-height: 18px;
+}
+
+.text1 {
+    top: 159px;
+}
+
+.text2 {
+    top: 209px;
+    right: 224px;
+    width: 72px;
+    border-bottom: 2px solid black;
+}
+
+.text3 {
+    top: 259px;
+}
+
+.header-close {
+    position: absolute;
+    z-index: 10;
+    top: 22px;
+    right: 22px;
+}
+
+.header-close:hover {
+    cursor: pointer;
+}
+
+.header-profileBurger {
+    width: 100px;
+    height: 32px;
+    position: absolute;
+    z-index: 10;
+    top: 909px;
+    right: 210px;
+}
+
+.header-box {
+    display: flex;
+    align-items: center;
+}
+
+.header-link {
+    text-decoration: none;
+    color: black;
+    font-family: 'Inter', 'Arial', 'Helvetica';
+    font-size: 13px;
+    line-height: 18px;
+}
+
+.films {
+    font-weight: 500;
+    margin-left: 44px;
+}
+
+.saved {
+    font-weight: 400;
+    margin-left: 16px;
+}
+
+.header-link {
+    font-family: 'Inter', 'Arial', 'Helvetica';
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    text-decoration: none;
+    margin-right: 20px;
+    color: black;
+}
+
+.header-profile {
+    width: 100px;
+    height: 32px;
+}
+
+@media screen and (max-width: 768px) {
+    .header-link {
+        font-size: 10px;
+    }
+}
+
+@media screen and (max-width: 1280px) {
+    .header-profile {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1280px) {
+    .header-link {
+        display: none;
+    }
+}

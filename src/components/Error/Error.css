@@ -1,0 +1,62 @@
+.error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    height: 100vh;
+}
+
+.error-title {
+    font-family: 'Inter', 'Arial', 'Helvetica';
+    font-weight: 400;
+    font-size: 140px;
+    margin: 246px auto 0;
+}
+
+.error-subtitle {
+    font-family: 'Inter', 'Arial', 'Helvetica';
+    font-weight: 400;
+    font-size: 16px;
+    margin: 5px 0 0;
+}
+
+.error-link {
+    text-decoration: none;
+    font-family: 'Inter', 'Arial', 'Helvetica';
+    font-weight: 400;
+    font-size: 14px;
+    color: #3456F3;
+    position: absolute;
+    bottom: 60px;
+}
+
+@media screen and (max-width: 1280px) {
+    .error-title {
+        margin: 408px auto 0;
+    }
+}
+
+@media screen and (max-width: 1280px) {
+    .error-link {
+        bottom: 222px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .error-title {
+        margin: 329px auto 0;
+        font-size: 80px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .error-subtitle {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .error-link {
+        bottom: 30px;
+    }
+}

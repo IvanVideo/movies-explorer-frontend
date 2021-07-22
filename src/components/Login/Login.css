@@ -1,0 +1,153 @@
+.login-conteiner {
+    max-width: 396px;
+    margin: 0 auto;
+}
+
+.login-svg {
+    width: 38px;
+    height: 38px;
+    margin-top: 70px;
+}
+
+.login-title {
+    font-family: 'Inter', 'Arial', 'Helvetica';
+    font-weight: 500;
+    font-size: 24px;
+    margin: 40px 0 0;
+}
+
+.login-button {
+    height: 45px;
+    max-width: 396px;
+    width: 100%;
+    color: #fff;
+    background-color: #3456F3;
+    border-radius: 3px;
+    font-family: 'Inter', 'Arial', 'Helvetica';
+    font-weight: 500;
+    font-size: 14px;
+    margin-top: 69px;
+    border: none;
+}
+
+.login-button:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.login-footer {
+    display: flex;
+    margin-top: 16px;
+    justify-content: center;
+}
+
+.login-text {
+    margin: 0 6px 0;
+    font-family: 'Inter', 'Arial', 'Helvetica';
+    font-weight: 400;
+    font-size: 14px;
+    color: #A0A0A0;
+}
+
+.login-link {
+    text-decoration: none;
+    font-family: 'Inter', 'Arial', 'Helvetica';
+    font-weight: 400;
+    font-size: 14px;
+    color: #3456F3;
+}
+
+.login-link:hover {
+    opacity: 0.7;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+}
+
+.form-input {
+    height: 27px;
+    border: none;
+    margin-top: 5px;
+    border-bottom: 1px solid #E8E8E8;
+    font-family: 'Inter', 'Arial', 'Helvetica';
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.form-input:focus {
+    outline: none;
+    border-bottom: 1px solid #3456F3;
+}
+
+.form-label {
+    color: #A0A0A0;
+    font-family: 'Inter', 'Arial', 'Helvetica';
+    font-weight: 400;
+    font-size: 10px;
+    margin-top: 20px;
+}
+
+.form-label:first-child {
+    margin-top: 0;
+}
+
+.form-error {
+    font-family: 'Inter', 'Arial', 'Helvetica';
+    font-weight: 400;
+    font-size: 10px;
+    color: #FF3055;
+    margin-top: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .login-conteiner {
+        max-width: 260px;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .login-svg {
+        margin-left: 111px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .login-title {
+        text-align: center;
+        margin: 50px 0 0;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .login-button {
+        margin-top: 276px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .login-svg {
+        margin-top: 56px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .form {
+        margin-top: 80px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .login-text {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .login-link {
+        font-size: 12px;
+    }
+}
