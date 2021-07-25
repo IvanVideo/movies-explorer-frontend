@@ -31,6 +31,10 @@
     margin: 30px 0 0 22px;
 }
 
+.white {
+    background-image: url('../../images/icon.svg');
+}
+
 .moviesCard-notLike {
     border: none;
     width: 8px;
@@ -94,6 +98,14 @@
 
 @media screen and (max-width: 768px) {
     .moviesCard-like {
+        position: absolute;
+        bottom: 36px;
+        right: 16px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .moviesCard-notLike {
         position: absolute;
         bottom: 36px;
         right: 16px;
