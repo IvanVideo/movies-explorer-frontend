@@ -1,0 +1,29 @@
+.navTab {
+    display: flex;
+    justify-content: center;
+    background-color: #F5F5F5;
+}
+
+.navTab-link {
+    font-family: 'Inter', 'Arial', 'Helvetica';
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    color: black;
+    margin: 24px 40px 24px 0;
+}
+
+.navTab-link:hover {
+    opacity: 0.7;
+}
+
+.navTab-link:last-child {
+    margin-right: 0;
+}
+
+@media screen and (max-width: 768px) {
+    .navTab-link {
+        margin-right: 24px;
+        font-size: 11px;
+    }
+}

@@ -1,0 +1,40 @@
+.savedMoviesCardList-position {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding-bottom: 140px;
+}
+
+.savedMoviesCardList-conteiner {
+    max-width: 1140px;
+    width: 100%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: repeat(3, 134px);
+    grid-row-gap: 40px;
+    padding-top: 60px;
+}
+
+@media screen and (max-width: 1280px) {
+    .savedMoviesCardList-position {
+        max-width: 708px;
+    }
+}
+
+@media screen and (max-width: 1280px) {
+    .savedMoviesCardList-conteiner {
+        max-width: 708px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .savedMoviesCardList-conteiner {
+        max-width: 300px;
+        grid-template-rows: repeat(3, 232px);
+        grid-row-gap: 20px;
+        padding-top: 40px;
+    }
+}
