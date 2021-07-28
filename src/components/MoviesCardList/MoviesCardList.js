@@ -3,51 +3,29 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import SearchForm from '../SearchForm/SearchForm';
-import React from 'react';
-import film from '../../images/pic.svg';
+import { React, useEffect } from 'react';
 
-const MoviesCardList = () => {
+
+const MoviesCardList = ({ enterValue, dataFilms, serchValue, handleLikeClick }) => {
+
+    let cardsArray = Array.from(dataFilms)
+    let newCardsArray = cardsArray.slice(0, 6)
+    console.log(newCardsArray, 'abkmvs')
     return (
         <section className='moviesCardList'>
             <Header />
             <div className='moviesCardList-position'>
-                <SearchForm />
+                <SearchForm enterValue={enterValue} />
                 <div className='moviesCardList-conteiner'>
-                    <MoviesCard />
-                    <MoviesCard />
-                    <section className='moviesCard'>
-                        <div className='moviesCard-content'>
-                            <h2 className='moviesCard-title'>33 слова о дизайне</h2>
-                            <p className='moviesCard-time'>1ч 42м</p>
-                            <button className='moviesCard-like white'></button>
-                        </div>
-                        <img className='moviesCard-img' alt='picture' src={film} />
-                    </section>
-                    <section className='moviesCard'>
-                        <div className='moviesCard-content'>
-                            <h2 className='moviesCard-title'>33 слова о дизайне</h2>
-                            <p className='moviesCard-time'>1ч 42м</p>
-                            <button className='moviesCard-like'></button>
-                        </div>
-                        <img className='moviesCard-img' alt='picture' src={film} />
-                    </section>
-                    <MoviesCard />
-                    <section className='moviesCard'>
-                        <div className='moviesCard-content'>
-                            <h2 className='moviesCard-title'>33 слова о дизайне</h2>
-                            <p className='moviesCard-time'>1ч 42м</p>
-                            <button className='moviesCard-like white'></button>
-                        </div>
-                        <img className='moviesCard-img' alt='picture' src={film} />
-                    </section>
-                    <section className='moviesCard'>
-                        <div className='moviesCard-content'>
-                            <h2 className='moviesCard-title'>33 слова о дизайне</h2>
-                            <p className='moviesCard-time'>1ч 42м</p>
-                            <button className='moviesCard-like white'></button>
-                        </div>
-                        <img className='moviesCard-img' alt='picture' src={film} />
-                    </section>
+                    {
+                        newCardsArray.map(item => (
+                            <MoviesCard
+                                key={item.id}
+                                card={item}
+                                handleLikeClick={handleLikeClick}
+                            />
+                        ))
+                    }
                 </div>
                 <button className='moviesCardList-button'>Ещё</button>
             </div>

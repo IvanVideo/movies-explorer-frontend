@@ -1,4 +1,4 @@
-class ApiAuth {
+class MainApi {
     constructor({ baseUrl, headers }) {
         this._baseUrl = baseUrl;
         this._headers = headers
@@ -8,16 +8,16 @@ class ApiAuth {
         return response.ok ? response.json() : Promise.reject(new Error(`Ошибка ${response.status} : ${response.statusText}`))
     }
 
-    // checkToken(token) {
-    //     return fetch(`${this._baseUrl}/users/me`, {
-    //         method: 'GET',
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //             "Authorization": `Bearer ${token}`
-    //         },
-    //     })
-    //         .then(res => this._checkResponse(res));
-    // }
+    checkToken(token) {
+        return fetch(`${this._baseUrl}/users/me`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+        })
+            .then(res => this._checkResponse(res));
+    }
 
     register({ name, email, password }) {
         return fetch(`${this._baseUrl}/signup`, {
@@ -29,7 +29,7 @@ class ApiAuth {
                 "password": password
             })
         })
-        .then(res => this._checkResponse(res));
+            .then(res => this._checkResponse(res));
     }
 
     authorize({ email, password }) {
@@ -43,6 +43,20 @@ class ApiAuth {
         })
             .then(res => this._checkResponse(res));
     }
+
+    getUserInfo(jwt) {
+        return fetch(`${this._baseUrl}/users/me`, {
+            credentials: 'include',
+            headers: {
+                authorization: `Bearer ${jwt}`,
+                'Content-Type': 'application/json'
+              }
+        })
+            .then(res => {
+                return this._checkResponse(res);
+            })
+    }
+
 }
 
 const config = {
@@ -50,5 +64,5 @@ const config = {
     headers: { 'Content-Type': 'application/json' }
 }
 
-const apiAuth = new ApiAuth(config);
-export default apiAuth;
+const mainApi = new MainApi(config);
+export default mainApi;

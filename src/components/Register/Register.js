@@ -32,11 +32,11 @@ const Register = (props) => {
         <h1 className="register-title">Добро пожаловать!</h1>
         <form className="form" onSubmit={handleSubmit} >
           <label className="form-label">Имя</label>
-          <input className="form-input" onChange={handleChangeName} />
+          <input className="form-input" required onChange={handleChangeName} />
           <label className="form-label">E-mail</label>
-          <input className="form-input" onChange={handleChangeEmail} />
+          <input className="form-input" required type="email" onChange={handleChangeEmail} />
           <label className="form-label">Пароль</label>
-          <input className="form-input" onChange={handleChangePassword} />
+          <input className="form-input" required onChange={handleChangePassword} />
           <span id="form-err" className="form-error">
             Что-то пошло не так...
           </span>
@@ -44,11 +44,9 @@ const Register = (props) => {
         </form>
         <div className="register-footer">
           <p className="register-text">Уже зарегистрированы?</p>
-          <BrowserRouter>
-            <Link className="register-link" to="/signin">
-              Войти
-            </Link>
-          </BrowserRouter>
+          <Link className="register-link" to="/signin">
+            Войти
+          </Link>
         </div>
       </div>
     </section>

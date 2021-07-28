@@ -13,43 +13,60 @@ import Portfolio from "../Portfolio/Portfolio";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Profile from "../Profile/Profile";
 import SavedMovies from "../SavedMovies/SavedMovies";
-import React from "react";
-import apiAuth from "../../utils/apiAuth";
+import React, { useEffect } from "react";
+import mainApi from "../../utils/MainApi";
+import moviesApi from '../../utils/MoviesApi';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-import { Route, Switch, useHistory } from "react-router-dom";
+import { Route, Switch, useHistory, Redirect } from "react-router-dom";
 
 function App() {
-  const [loggedIn, setLoggedIn] = React.useState('false');
-  console.log(loggedIn, 'статус')
-  const history = useHistory();
-  // const [userInfo, setUserInfo] = React.useState({
-  //   email: "",
-  //   name: "",
-  // });
 
-  //   const tokenCheck = () => {
-  //   const jwt = localStorage.getItem('token');
-  //   if (jwt && jwt !== null) {
-  //     apiAuth.checkToken(jwt)
-  //       .then((res) => {
-  //         setUserInfo({ email: res.email });
-  //         setLoggedIn(true);
-  //         history.push("/");
-  //       })
-  //       .catch((err) => {
-  //         console.log(err)
-  //       })
-  //   } else {
-  //     return
-  //   }
-  // }
+  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [isLiked, setIsLiked] = React.useState(false);
+  const [dataFilms, setDataFilms] = React.useState({});
+  const [serchValue, setSerchValue] = React.useState('');
+  const [currentUser, setCurrentUser] = React.useState({});
+
+  const history = useHistory();
+
+
+  const tokenCheck = () => {
+    const jwt = localStorage.getItem('token');
+    if (jwt && jwt !== null) {
+      mainApi.checkToken(jwt)
+        .then((res) => {
+          setLoggedIn(true);
+          history.push("/movies");
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    } else {
+      return
+    }
+  }
+
+  useEffect(() => {
+    tokenCheck();
+    const jwt = localStorage.getItem('token');
+    mainApi.getUserInfo(jwt)
+      .then(userInfo => {
+        setCurrentUser(userInfo)
+      })
+    moviesApi.getFilms()
+      .then((dataMovies) => {
+        setDataFilms(dataMovies);
+      })
+  }, [])
+
 
   const registerUser = ({ name, email, password }) => {
-    return apiAuth
+    return mainApi
       .register({ name, email, password })
       .then((res) => {
-        // setUserInfo({ email: res.email, name: res.name });
+        setUserInfo({ email: res.data.email, name: res.data.name });
         history.push("/signin");
       })
       .catch((err) => {
@@ -57,49 +74,82 @@ function App() {
       });
   };
 
-  const loginUser = ({ email, password }) => {
-    return apiAuth
+  const login = ({ email, password }) => {
+    return mainApi
       .authorize({ email, password })
       .then((res) => {
         localStorage.setItem('token', res.token);
         setLoggedIn(true);
-        // tokenCheck();
+        tokenCheck();
         history.push("/movies")
       })
   }
 
+  const enterValue = (data) => {
+    setSerchValue(data)
+  }
+
+  const logout = () => {
+    localStorage.removeItem('token');
+    history.push('/');
+  }
+
+  const handleLikeClick = (card) => {
+    const jwt = localStorage.getItem('token');
+    console.log(card)
+    // setIsLiked
+  }
+
   return (
-    <div className="app">
-      <Switch>
-        <Route path="/signin">
-          <Login onLoginInfo={loginUser} />
-        </Route>
-        <Route path="/signup">
-          <Register onRegistrInfo={registerUser} />
-        </Route>
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="app">
+        <Switch>
+          <Route path="/signin">
+            <Login onLoginInfo={login} />
+          </Route>
+          <Route path="/signup">
+            <Register onRegistrInfo={registerUser} />
+          </Route>
 
-        <ProtectedRoute path="/movies" loggedIn={loggedIn} component={MoviesCardList} >
-        </ProtectedRoute>
-        <ProtectedRoute path="/saved-movies">
-          <SavedMovies />
-        </ProtectedRoute>
-        <ProtectedRoute path="/profile">
-          <Profile />
-        </ProtectedRoute>
-        <Route path="/">
-          <Promo />
-          <NavTab />
-          <AboutProject />
-          <Techs />
-          <AboutMe />
-          <Portfolio />
-          <Footer />
-        </Route>
-      </Switch>
-      {/* <Header /> */}
+          <ProtectedRoute
+            path="/movies"
+            loggedIn={loggedIn}
+            dataFilms={dataFilms}
+            serchValue={serchValue}
+            component={MoviesCardList}
+            enterValue={enterValue}
+            handleLikeClick={handleLikeClick}
+          />
+          <ProtectedRoute
+            path="/saved-movies"
+            loggedIn={loggedIn}
+            component={SavedMovies}
+          />
+          <ProtectedRoute
+            path="/profile"
+            loggedIn={loggedIn}
+            component={Profile}
+            logout={logout}
+            userInfo={currentUser}
+          />
+          <Route exact path="/">
+            {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />}
+          </Route>
+          <Route path="/">
+            <Promo />
+            <NavTab />
+            <AboutProject />
+            <Techs />
+            <AboutMe />
+            <Portfolio />
+            <Footer />
+          </Route>
+        </Switch>
+        {/* <Header /> */}
 
-      {/* <Error /> */}
-    </div>
+        {/* <Error /> */}
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 

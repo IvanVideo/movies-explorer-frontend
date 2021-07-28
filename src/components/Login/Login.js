@@ -26,7 +26,7 @@ const Login = (props) => {
                 <img className='login-svg' alt='logo' src={logo} />
                 <h1 className='login-title'>Рады видеть!</h1>
                 <form className='form' onSubmit={handleSubmit} >
-                    <label className='form-label'>E-mail</label>
+                    <label className='form-label'>111@111.ru</label>
                     <input className='form-input' onChange={handleChangeEmail} />
                     <label className='form-label'>Пароль</label>
                     <input className='form-input' onChange={handleChangePassword} />

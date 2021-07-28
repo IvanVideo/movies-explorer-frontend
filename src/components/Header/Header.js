@@ -16,9 +16,9 @@ const Header = () => {
                         <Link className='header-link saved' to='/saved-movies'>Сохранённые фильмы</Link>
                     </div>
                     <Link className='header-profile' to='/profile'><img alt='profile' src={profile} /></Link>
-                    <div className='header-burger'>
+                    {/* <div className='header-burger'>
                         <span className='header-burgerMenu'></span>
-                    </div>
+                    </div> */}
                     {/* <p className='header-burgerText text1'>Главная</p>
                     <p className='header-burgerText text2'>Фильмы</p>
                     <p className='header-burgerText text3'>Сохранённые фильмы</p>
