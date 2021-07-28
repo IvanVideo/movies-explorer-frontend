@@ -46,7 +46,7 @@ class ApiAuth {
 }
 
 const config = {
-    baseUrl: 'https://cinema.nomoredomains.monster',
+    baseUrl: 'https://api.cinema.nomoredomains.monster',
     headers: { 'Content-Type': 'application/json' }
 }
 

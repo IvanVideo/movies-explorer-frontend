@@ -15,11 +15,14 @@ import Profile from "../Profile/Profile";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import React from "react";
 import apiAuth from "../../utils/apiAuth";
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useHistory } from "react-router-dom";
 
 function App() {
   const [loggedIn, setLoggedIn] = React.useState('false');
+  console.log(loggedIn, 'статус')
+  const history = useHistory();
   // const [userInfo, setUserInfo] = React.useState({
   //   email: "",
   //   name: "",
@@ -46,9 +49,8 @@ function App() {
     return apiAuth
       .register({ name, email, password })
       .then((res) => {
-        console.log(res, "ответ бэка");
         // setUserInfo({ email: res.email, name: res.name });
-        history.push("/sign-in");
+        history.push("/signin");
       })
       .catch((err) => {
         console.log(err);
@@ -59,11 +61,10 @@ function App() {
     return apiAuth
       .authorize({ email, password })
       .then((res) => {
-        console.log(res, "ответ бэка");
         localStorage.setItem('token', res.token);
         setLoggedIn(true);
         // tokenCheck();
-        history.push("/")
+        history.push("/movies")
       })
   }
 
@@ -77,15 +78,14 @@ function App() {
           <Register onRegistrInfo={registerUser} />
         </Route>
 
-        <Route path="/movies">
-          <MoviesCardList />
-        </Route>
-        <Route path="/saved-movies">
+        <ProtectedRoute path="/movies" loggedIn={loggedIn} component={MoviesCardList} >
+        </ProtectedRoute>
+        <ProtectedRoute path="/saved-movies">
           <SavedMovies />
-        </Route>
-        <Route path="/profile">
+        </ProtectedRoute>
+        <ProtectedRoute path="/profile">
           <Profile />
-        </Route>
+        </ProtectedRoute>
         <Route path="/">
           <Promo />
           <NavTab />
