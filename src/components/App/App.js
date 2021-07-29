@@ -26,8 +26,10 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [isLiked, setIsLiked] = React.useState(false);
   const [dataFilms, setDataFilms] = React.useState({});
-  const [serchValue, setSerchValue] = React.useState('');
+  // const [serchValue, setSerchValue] = React.useState('');
   const [currentUser, setCurrentUser] = React.useState({});
+  const [userFilmsArr, setUserFilmsArr] = React.useState({});
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const history = useHistory();
 
@@ -55,10 +57,10 @@ function App() {
       .then(userInfo => {
         setCurrentUser(userInfo)
       })
-    moviesApi.getFilms()
-      .then((dataMovies) => {
-        setDataFilms(dataMovies);
-      })
+    // moviesApi.getFilms()
+    //   .then((dataMovies) => {
+    //     setDataFilms(dataMovies);
+    //   })
   }, [])
 
 
@@ -86,7 +88,19 @@ function App() {
   }
 
   const enterValue = (data) => {
-    setSerchValue(data)
+    setIsLoading(true);
+    // setSerchValue(data)
+    moviesApi.getFilms()
+    .then((dataMovies) => {
+      setDataFilms(dataMovies);
+      let serchResultArray = dataMovies.filter(item => item.nameRU.includes(data))
+      setUserFilmsArr(serchResultArray)
+      setIsLoading(false);
+    })
+    // let cardsArray = Array.from(dataFilms)
+    // let serchResultArray = cardsArray.filter(item => item.nameRU.includes(`${data}`))
+    // setUserFilmsArr(serchResultArray)
+    // console.log(userFilmsArr, 'запрос пользователя')
   }
 
   const logout = () => {
@@ -114,8 +128,9 @@ function App() {
           <ProtectedRoute
             path="/movies"
             loggedIn={loggedIn}
-            dataFilms={dataFilms}
-            serchValue={serchValue}
+            dataFilms={userFilmsArr}
+            isLoading={isLoading}
+            // serchValue={serchValue}
             component={MoviesCardList}
             enterValue={enterValue}
             handleLikeClick={handleLikeClick}
