@@ -10,7 +10,7 @@
     width: 100%;
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: repeat(7, 134px);
+    grid-template-rows: repeat(6, 134px);
     grid-row-gap: 40px;
     padding-top: 60px;
 }

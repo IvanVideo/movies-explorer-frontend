@@ -28,6 +28,43 @@
     width: 141px;
 }
 
+.profile-input {
+    font-family: 'Inter', 'Arial', 'Helvetica';
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 13px;
+    height: 14px;
+    width: 100%;
+    padding: 0;
+    border: none;
+    text-align: right;
+}
+
+.notVisible {
+    display: none;
+}
+
+.profile-buttonSave {
+    width: 410px;
+    height: 45px;
+    color: #fff;
+    background-color: #3456F3;
+    border-radius: 3px;
+    border: none;
+    font-family: 'Inter', 'Arial', 'Helvetica';
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+.profile-buttonSave:hover {
+    cursor: pointer;
+}
+
+.profile-input:focus {
+    outline: none;
+}
+
 .profile-title {
     font-family: 'Inter', 'Arial', 'Helvetica';
     font-weight: 500;
