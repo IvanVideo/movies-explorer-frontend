@@ -25,14 +25,12 @@ function App() {
 
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [isLiked, setIsLiked] = React.useState(false);
-  const [dataFilms, setDataFilms] = React.useState({});
   // const [serchValue, setSerchValue] = React.useState('');
   const [currentUser, setCurrentUser] = React.useState({});
   const [userFilmsArr, setUserFilmsArr] = React.useState({});
   const [isLoading, setIsLoading] = React.useState(false);
 
   const history = useHistory();
-
 
   const tokenCheck = () => {
     const jwt = localStorage.getItem('token');
@@ -87,20 +85,15 @@ function App() {
       })
   }
 
+  //Api запрос фильмов и поиск в нем фильмов по результату поиска
   const enterValue = (data) => {
     setIsLoading(true);
-    // setSerchValue(data)
     moviesApi.getFilms()
     .then((dataMovies) => {
-      setDataFilms(dataMovies);
       let serchResultArray = dataMovies.filter(item => item.nameRU.includes(data))
       setUserFilmsArr(serchResultArray)
       setIsLoading(false);
     })
-    // let cardsArray = Array.from(dataFilms)
-    // let serchResultArray = cardsArray.filter(item => item.nameRU.includes(`${data}`))
-    // setUserFilmsArr(serchResultArray)
-    // console.log(userFilmsArr, 'запрос пользователя')
   }
 
   const logout = () => {

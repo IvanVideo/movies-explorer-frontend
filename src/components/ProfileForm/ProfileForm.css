@@ -1,0 +1,29 @@
+.profileForm {
+    height: 60px;
+    max-width: 205px;
+    position: relative;
+}
+
+.profileForm-input {
+    font-family: 'Inter', 'Arial', 'Helvetica';
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 13px;
+    width: 100%;
+    padding: 0;
+    height: 25px;
+    border: none;
+    text-align: right;
+}
+
+.profileForm-input:focus {
+    outline: none;
+}
+
+.form-line {
+    margin: 4px 0;
+    width: 100%;
+    height: 1px;
+    border: none;
+    background-color: #E8E8E8;
+}

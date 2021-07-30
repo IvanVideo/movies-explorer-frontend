@@ -1,0 +1,39 @@
+.buttonSave-active {
+    margin-top: 223px;
+    width: 410px;
+    height: 45px;
+    color: #fff;
+    background-color: #3456F3;
+    border-radius: 3px;
+    border: none;
+    font-family: 'Inter', 'Arial', 'Helvetica';
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    position: absolute;
+    right: 0px;
+}
+
+.buttonSave-disabled {
+    margin-top: 223px;
+    width: 410px;
+    height: 45px;
+    color: #C2C2C2;
+    background-color: #F8F8F8;
+    border-radius: 3px;
+    border: none;
+    font-family: 'Inter', 'Arial', 'Helvetica';
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    position: absolute;
+    right: 0px;
+}
+
+.buttonSave:hover {
+    cursor: pointer;
+}
+
+.notVisible {
+    display: none;
+}

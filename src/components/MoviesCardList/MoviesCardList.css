@@ -32,6 +32,19 @@
     opacity: 0.8;
 }
 
+.emptySearch{
+    width: 100%;
+    text-align: center;
+    font-family: 'Inter', 'Arial', 'Helvetica';
+    font-weight: 500;
+    font-size: 44px;
+    line-height: 55px;
+}
+
+.emptySearch-notVisible {
+    display: none;
+}
+
 @media screen and (max-width: 1280px) {
     .moviesCardList-position {
         width: 708px;

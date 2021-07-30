@@ -9,15 +9,12 @@ import Preloader from '../Preloader/Preloader';
 
 const MoviesCardList = (props) => {
     const cardsConteiner = document.querySelector('.moviesCardList-conteiner');
-
-    let cardsArray = Array.from(props.dataFilms)
-    let newCardsArray = cardsArray.slice(0, 6)
-
-    let serchResult = newCardsArray.filter(item => item.nameRU.includes(`${props.serchValue}`))
-
     const handleButtonClick = () => {
         cardsConteiner.scrollIntoView({ block: "center", behavior: "smooth" });
     }
+
+    let cardsArray = Array.from(props.dataFilms)
+    let newCardsArray = cardsArray.slice(0, 6)
 
     return (
         <section className='moviesCardList'>
@@ -25,6 +22,7 @@ const MoviesCardList = (props) => {
             <div className='moviesCardList-position'>
                 <SearchForm enterValue={props.enterValue} />
                 <div className='moviesCardList-conteiner'>
+                    <h1 className={props.dataFilms.length === 0 ? 'emptySearch' : 'emptySearch-notVisible'}>Ничего не найдено</h1>
                     {props.isLoading ? <Preloader isLoading={props.isLoading} /> : newCardsArray.map(item => (
                         <MoviesCard
                             key={item.id}
