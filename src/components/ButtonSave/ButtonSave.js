@@ -4,7 +4,7 @@ import React from 'react';
 const ButtonSave = (props) => {
 
     return (
-        <button className={props.inputStatus ? 'buttonSave-active' : 'buttonSave-disabled'} >Сохранить</button>
+        <button className={props.inputStatus ? 'buttonSave__active' : 'buttonSave__disabled'} >Сохранить</button>
     )
 }
 

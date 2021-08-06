@@ -7,19 +7,19 @@ import React from 'react';
 const Promo = () => {
     return (
         <section className='promo'>
-            <div className='promo-conteiner'>
-                <div className='promo-header'>
-                    <a href='#about'><img className='promo-logo' alt='logo' src={logo} /></a>
-                    <div className='promo-start'>
-                        <Link className='promo-singup' to='/signup'>Регистрация</Link>
-                        <Link className='promo-link' to='/signin'>
-                            <button className='promo-button'>Войти</button>
+            <div className='promo__conteiner'>
+                <div className='promo__header'>
+                    <a href='#about'><img className='promo__logo' alt='logo' src={logo} /></a>
+                    <div className='promo__start'>
+                        <Link className='promo__singup' to='/signup'>Регистрация</Link>
+                        <Link className='promo__link' to='/signin'>
+                            <button className='promo__button'>Войти</button>
                         </Link>
                     </div>
                 </div>
-                <div className='promo-content'>
-                    <h1 className='promo-title'>Учебный проект студента факультета Веб-разработки.</h1>
-                    <img className='promo-img' alt='logo' src={pic} />
+                <div className='promo__content'>
+                    <h1 className='promo__title'>Учебный проект студента факультета Веб-разработки.</h1>
+                    <img className='promo__img' alt='logo' src={pic} />
                 </div>
             </div>
         </section>

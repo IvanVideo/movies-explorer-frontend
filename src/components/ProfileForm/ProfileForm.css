@@ -4,7 +4,7 @@
     position: relative;
 }
 
-.profileForm-input {
+.profileForm__input {
     font-family: 'Inter', 'Arial', 'Helvetica';
     font-weight: 500;
     font-size: 11px;
@@ -16,11 +16,11 @@
     text-align: right;
 }
 
-.profileForm-input:focus {
+.profileForm__input:focus {
     outline: none;
 }
 
-.form-line {
+.form__line {
     margin: 4px 0;
     width: 100%;
     height: 1px;

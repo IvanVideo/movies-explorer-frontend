@@ -25,11 +25,15 @@ function App() {
 
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [isLiked, setIsLiked] = React.useState(false);
-  // const [serchValue, setSerchValue] = React.useState('');
   const [currentUser, setCurrentUser] = React.useState({});
   const [userFilmsArr, setUserFilmsArr] = React.useState({});
   const [isLoading, setIsLoading] = React.useState(false);
 
+
+  const [width, setWidth] = React.useState(document.documentElement.clientWidth);
+  const [height, setHeight] = React.useState(document.documentElement.clientHeight);
+
+  // console.log(`высота ${height}, ширина ${width}`)
   const history = useHistory();
 
   const tokenCheck = () => {
@@ -55,10 +59,14 @@ function App() {
       .then(userInfo => {
         setCurrentUser(userInfo)
       })
-    // moviesApi.getFilms()
-    //   .then((dataMovies) => {
-    //     setDataFilms(dataMovies);
-    //   })
+      .catch((err) => {
+        console.log(err)
+      })
+    const handleResize = () => {
+      setWidth(document.documentElement.clientWidth);
+      setHeight(document.documentElement.clientHeight);
+    }
+    window.addEventListener('resize', handleResize)
   }, [])
 
 
@@ -81,6 +89,7 @@ function App() {
         localStorage.setItem('token', res.token);
         setLoggedIn(true);
         tokenCheck();
+        console.log('000');
         history.push("/movies")
       })
   }
@@ -89,11 +98,11 @@ function App() {
   const enterValue = (data) => {
     setIsLoading(true);
     moviesApi.getFilms()
-    .then((dataMovies) => {
-      let serchResultArray = dataMovies.filter(item => item.nameRU.includes(data))
-      setUserFilmsArr(serchResultArray)
-      setIsLoading(false);
-    })
+      .then((dataMovies) => {
+        let serchResultArray = dataMovies.filter(item => item.nameRU.includes(data))
+        setUserFilmsArr(serchResultArray)
+        setIsLoading(false);
+      })
   }
 
   const logout = () => {
@@ -117,12 +126,23 @@ function App() {
           <Route path="/signup">
             <Register onRegistrInfo={registerUser} />
           </Route>
+          <Route exact path="/">
+            <Promo />
+            <NavTab />
+            <AboutProject />
+            <Techs />
+            <AboutMe />
+            <Portfolio />
+            <Footer />
+          </Route>
 
+          {/* <MoviesCardList path="/movies" enterValue={enterValue} handleLikeClick={handleLikeClick} isLoading={isLoading} dataFilms={userFilmsArr}  /> */}
           <ProtectedRoute
             path="/movies"
             loggedIn={loggedIn}
             dataFilms={userFilmsArr}
             isLoading={isLoading}
+            widthWindow={width}
             // serchValue={serchValue}
             component={MoviesCardList}
             enterValue={enterValue}
@@ -143,15 +163,7 @@ function App() {
           <Route exact path="/">
             {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />}
           </Route>
-          <Route path="/">
-            <Promo />
-            <NavTab />
-            <AboutProject />
-            <Techs />
-            <AboutMe />
-            <Portfolio />
-            <Footer />
-          </Route>
+
         </Switch>
         {/* <Header /> */}
 

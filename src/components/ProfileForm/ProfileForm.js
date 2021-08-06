@@ -24,16 +24,16 @@ const ProfileForm = (props) => {
     }
 
     return (
-        <div className='profile-content'>
-            <div className='profile-box first'>
-                <p className='profile-name left'>Имя</p>
-                <hr className='profile-line' />
-                <p className='profile-name left'>E-mail</p>
+        <div className='profile__content'>
+            <div className='profile__box first'>
+                <p className='profile__name left'>Имя</p>
+                <hr className='profile__line' />
+                <p className='profile__name left'>E-mail</p>
             </div>
             <form className='profileForm'>
-                <input className='profileForm-input' placeholder={props.userInfo.name} onChange={handleChangeName} ></input>
-                <hr className='form-line' />
-                <input className='profileForm-input' placeholder={props.userInfo.email} onChange={handleChangeMail} ></input>
+                <input className='profileForm__input' placeholder={props.userInfo.name} onChange={handleChangeName} ></input>
+                <hr className='form__line' />
+                <input className='profileForm__input' placeholder={props.userInfo.email} onChange={handleChangeMail} ></input>
                 <ButtonSave inputStatus={inputStatus} />
             </form>
         </div>

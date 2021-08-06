@@ -2,18 +2,18 @@
     padding-top: 110px;
 }
 
-.aboutMe-content {
+.aboutMe__content {
     display: flex;
     justify-content: space-between;
     margin-top: 66px;
 }
 
-.aboutMe-img {
+.aboutMe__img {
     width: 270px;
     height: 327px;
 }
 
-.aboutMe-name {
+.aboutMe__name {
     margin: 0;
     font-family: 'Inter', 'Arial', 'Helvetica';
     font-weight: 400;
@@ -22,7 +22,7 @@
     letter-spacing: -0.04em;
 }
 
-.aboutMe-job {
+.aboutMe__job {
     margin: 18px 0 0;
     font-family: 'Inter', 'Arial', 'Helvetica';
     font-weight: 500;
@@ -30,7 +30,7 @@
     line-height: 20px;
 }
 
-.aboutMe-text {
+.aboutMe__text {
     margin: 26px 0 0;
     max-width: 600px;
     font-family: 'Inter', 'Arial', 'Helvetica';
@@ -39,7 +39,7 @@
     line-height: 22px;
 }
 
-.aboutMe-link {
+.aboutMe__link {
     font-family: 'Inter', 'Arial', 'Helvetica';
     font-weight: 500;
     font-size: 14px;
@@ -49,19 +49,19 @@
     color: black;
 }
 
-.aboutMe-links {
+.aboutMe__links {
     margin-top: 100px;
 }
 
 @media screen and (max-width: 1280px) {
-    .aboutMe-name {
+    .aboutMe__name {
         font-size: 40px;
         line-height: 40px;
     }
 }
 
 @media screen and (max-width: 1280px) {
-    .aboutMe-job {
+    .aboutMe__job {
         margin: 16px 0 0;
         font-size: 12px;
         line-height: 18px;
@@ -69,7 +69,7 @@
 }
 
 @media screen and (max-width: 1280px) {
-    .aboutMe-text {
+    .aboutMe__text {
         margin: 20px 0 0;
         max-width: 364px;
         font-size: 12px;
@@ -78,14 +78,14 @@
 }
 
 @media screen and (max-width: 1280px) {
-    .aboutMe-img {
+    .aboutMe__img {
         width: 255px;
         height: 307px;
     }
 }
 
 @media screen and (max-width: 768px) {
-    .aboutMe-content {
+    .aboutMe__content {
         display: flex;
         flex-direction: column;
         margin-top: 60px;
@@ -93,7 +93,7 @@
 }
 
 @media screen and (max-width: 768px) {
-    .aboutMe-img {
+    .aboutMe__img {
         order: -1;
         width: 292px;
         height: 352px;
@@ -101,7 +101,7 @@
 }
 
 @media screen and (max-width: 768px) {
-    .aboutMe-text {
+    .aboutMe__text {
         order: 0;
         margin-top: 20px;
         max-width: 292px;
@@ -111,14 +111,14 @@
 }
 
 @media screen and (max-width: 768px) {
-    .aboutMe-name {
+    .aboutMe__name {
         font-size: 30px;
         line-height: 36px;
     }
 }
 
 @media screen and (max-width: 768px) {
-    .aboutMe-job {
+    .aboutMe__job {
         margin: 20px 0 0;
         font-size: 11px;
         line-height: 16px;
@@ -126,7 +126,7 @@
 }
 
 @media screen and (max-width: 768px) {
-    .aboutMe-links {
+    .aboutMe__links {
         margin-top: 40px;
     }
 }

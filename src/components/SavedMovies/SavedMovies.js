@@ -10,32 +10,32 @@ const SavedMovies = () => {
     return (
         <section className='savedMovies'>
             <Header />
-            <div className='savedMoviesCardList-position'>
+            <div className='savedMoviesCardList__position'>
                 <SearchForm />
-                <div className='savedMoviesCardList-conteiner'>
+                <div className='savedMoviesCardList__conteiner'>
                     <section className='moviesCard'>
-                        <div className='moviesCard-content'>
-                            <h2 className='moviesCard-title'>33 слова о дизайне</h2>
-                            <p className='moviesCard-time'>1ч 42м</p>
-                            <button className='moviesCard-notLike'></button>
+                        <div className='moviesCard__content'>
+                            <h2 className='moviesCard__title'>33 слова о дизайне</h2>
+                            <p className='moviesCard__time'>1ч 42м</p>
+                            <button className='moviesCard__notLike'></button>
                         </div>
-                        <img className='moviesCard-img' alt='picture' src={film} />
+                        <img className='moviesCard__img' alt='picture' src={film} />
                     </section>
                     <section className='moviesCard'>
-                        <div className='moviesCard-content'>
-                            <h2 className='moviesCard-title'>33 словnotLikeа о дизайне</h2>
-                            <p className='moviesCard-time'>1ч 42м</p>
-                            <button className='moviesCard-notLike'></button>
+                        <div className='moviesCard__content'>
+                            <h2 className='moviesCard__title'>33 словnotLikeа о дизайне</h2>
+                            <p className='moviesCard__time'>1ч 42м</p>
+                            <button className='moviesCard__notLike'></button>
                         </div>
-                        <img className='moviesCard-img' alt='picture' src={film} />
+                        <img className='moviesCard__img' alt='picture' src={film} />
                     </section>
                     <section className='moviesCard'>
-                        <div className='moviesCard-content'>
-                            <h2 className='moviesCard-title'>33 слова о дизайне</h2>
-                            <p className='moviesCard-time'>1ч 42м</p>
-                            <button className='moviesCard-notLike'></button>
+                        <div className='moviesCard__content'>
+                            <h2 className='moviesCard__title'>33 слова о дизайне</h2>
+                            <p className='moviesCard__time'>1ч 42м</p>
+                            <button className='moviesCard__notLike'></button>
                         </div>
-                        <img className='moviesCard-img' alt='picture' src={film} />
+                        <img className='moviesCard__img' alt='picture' src={film} />
                     </section>
                 </div>
             </div>

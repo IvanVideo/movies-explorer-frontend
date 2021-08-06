@@ -1,4 +1,4 @@
-.buttonSave-active {
+.buttonSave__active {
     margin-top: 223px;
     width: 410px;
     height: 45px;
@@ -14,7 +14,7 @@
     right: 0px;
 }
 
-.buttonSave-disabled {
+.buttonSave__disabled {
     margin-top: 223px;
     width: 410px;
     height: 45px;

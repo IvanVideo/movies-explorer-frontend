@@ -22,20 +22,20 @@ const Login = (props) => {
 
     return (
         <section className='login'>
-            <div className='login-conteiner'>
-                <img className='login-svg' alt='logo' src={logo} />
-                <h1 className='login-title'>Рады видеть!</h1>
+            <div className='login__conteiner'>
+                <img className='login__svg' alt='logo' src={logo} />
+                <h1 className='login__title'>Рады видеть!</h1>
                 <form className='form' onSubmit={handleSubmit} >
-                    <label className='form-label'>111@111.ru</label>
-                    <input className='form-input' onChange={handleChangeEmail} />
-                    <label className='form-label'>Пароль</label>
-                    <input className='form-input' onChange={handleChangePassword} />
-                    <span id="form-err" className="form-error">Что-то пошло не так...</span>
-                    <button className='login-button'>Войти</button>
+                    <label className='form__label'>111@111.ru</label>
+                    <input className='form__input' onChange={handleChangeEmail} />
+                    <label className='form__label'>Пароль</label>
+                    <input className='form__input' onChange={handleChangePassword} />
+                    <span id="form-err" className="form__error">Что-то пошло не так...</span>
+                    <button className='login__button'>Войти</button>
                 </form>
-                <div className='login-footer'>
-                    <p className='login-text'>Ещё не зарегистрированы?</p>
-                    <Link className='login-link' to='/signup'>Регистрация</Link>
+                <div className='login__footer'>
+                    <p className='login__text'>Ещё не зарегистрированы?</p>
+                    <Link className='login__link' to='/signup'>Регистрация</Link>
                 </div>
             </div>
         </section>

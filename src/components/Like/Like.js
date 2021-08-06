@@ -1,15 +1,23 @@
 import React, { useEffect } from 'react';
 
 
-const Like = () => {
-    const [isLiked, setIsLiked] = React.useState(false);
+const Like = (props) => {
+    // const [isLiked, setIsLiked] = React.useState(false);
+    // console.log(props.card, '1111')
 
     const changeStatus = () => {
-        setIsLiked(!isLiked);
+        console.log(props.card.isLiked, '1111')
+        if(props.card.isLiked === false) {
+            props.card.isLiked = true
+        } else {
+            props.card.isLiked = false
+        }
+        console.log(props.card.isLiked)
+        props.status(props.card)
     }
 
     return (
-        <button className={isLiked ? 'moviesCard-like activelike' : 'moviesCard-like'} onClick={changeStatus} />
+        <button className={props.card.isLiked ? 'moviesCard-like activelike' : 'moviesCard-like'} onClick={changeStatus} />
     )
 }
 

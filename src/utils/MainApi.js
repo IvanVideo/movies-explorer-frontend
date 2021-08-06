@@ -10,6 +10,7 @@ class MainApi {
 
     checkToken(token) {
         return fetch(`${this._baseUrl}/users/me`, {
+            credentials: 'include',
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
@@ -21,6 +22,7 @@ class MainApi {
 
     register({ name, email, password }) {
         return fetch(`${this._baseUrl}/signup`, {
+            credentials: 'include',
             method: 'POST',
             headers: this._headers,
             body: JSON.stringify({
@@ -34,6 +36,7 @@ class MainApi {
 
     authorize({ email, password }) {
         return fetch(`${this._baseUrl}/signin`, {
+            credentials: 'include',
             method: 'POST',
             headers: this._headers,
             body: JSON.stringify({

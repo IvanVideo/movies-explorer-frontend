@@ -20,20 +20,20 @@ const Profile = (props) => {
     return (
         <section className='profile'>
             <Header />
-            <div className='profile-conteiner'>
-                <h1 className='profile-title'>Привет, Иван!</h1>
-                <div className='profile-content'>
+            <div className='profile__conteiner'>
+                <h1 className='profile__title'>Привет, Иван!</h1>
+                <div className='profile__content'>
                     {isActive ? <ProfileForm userInfo={props.userInfo} /> :
                         <>
-                            <div className='profile-box first'>
-                                <p className='profile-name left'>Имя</p>
-                                <hr className='profile-line' />
-                                <p className='profile-name left'>E-mail</p>
+                            <div className='profile__box first'>
+                                <p className='profile__name left'>Имя</p>
+                                <hr className='profile__line' />
+                                <p className='profile__name left'>E-mail</p>
                             </div>
-                            <div className='profile-box second'>
-                                <p className={isActive ? 'profile-name notVisible' : 'profile-name'}>{props.userInfo.name}</p>
+                            <div className='profile__box second'>
+                                <p className={isActive ? 'profile__name notVisible' : 'profile__name'}>{props.userInfo.name}</p>
                                 <hr className='profile-line' />
-                                <p className={isActive ? 'profile-name notVisible' : 'profile-name'}>{props.userInfo.email}</p>
+                                <p className={isActive ? 'profile__name notVisible' : 'profile__name'}>{props.userInfo.email}</p>
                             </div>
                         </>
                     }

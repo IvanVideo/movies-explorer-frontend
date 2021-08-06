@@ -6,21 +6,21 @@
     height: 100vh;
 }
 
-.error-title {
+.error__title {
     font-family: 'Inter', 'Arial', 'Helvetica';
     font-weight: 400;
     font-size: 140px;
     margin: 246px auto 0;
 }
 
-.error-subtitle {
+.error__subtitle {
     font-family: 'Inter', 'Arial', 'Helvetica';
     font-weight: 400;
     font-size: 16px;
     margin: 5px 0 0;
 }
 
-.error-link {
+.error__link {
     text-decoration: none;
     font-family: 'Inter', 'Arial', 'Helvetica';
     font-weight: 400;
@@ -31,32 +31,32 @@
 }
 
 @media screen and (max-width: 1280px) {
-    .error-title {
+    .error__title {
         margin: 408px auto 0;
     }
 }
 
 @media screen and (max-width: 1280px) {
-    .error-link {
+    .error__link {
         bottom: 222px;
     }
 }
 
 @media screen and (max-width: 768px) {
-    .error-title {
+    .error__title {
         margin: 329px auto 0;
         font-size: 80px;
     }
 }
 
 @media screen and (max-width: 768px) {
-    .error-subtitle {
+    .error__subtitle {
         font-size: 12px;
     }
 }
 
 @media screen and (max-width: 768px) {
-    .error-link {
+    .error__link {
         bottom: 30px;
     }
 }
