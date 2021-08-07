@@ -1,43 +1,70 @@
-import './ProfileForm.css';
-import React, { useEffect } from 'react';
-import ButtonSave from '../ButtonSave/ButtonSave';
+import "./ProfileForm.css";
+import React, { useEffect, useCallback } from "react";
+import ButtonSave from "../ButtonSave/ButtonSave";
 
 const ProfileForm = (props) => {
-    const [name, setName] = React.useState('');
-    const [mail, setMail] = React.useState('');
-    const [inputStatus, setInputStatus] = React.useState(false);
+  const [values, setValues] = React.useState({});
+  const [errors, setErrors] = React.useState({});
+  const [isValid, setIsValid] = React.useState(false);
 
-    const handleChangeName = (e) => {
-        setName(e.target.value);
-        statusInputs()
-    }
+  const handleChange = (event) => {
+    const target = event.target;
+    const name = target.name;
+    const value = target.value;
+    setValues({ ...values, [name]: value });
+    setErrors({ ...errors, [name]: target.validationMessage });
+    setIsValid(target.closest("form").checkValidity());
+  };
 
-    const handleChangeMail = (e) => {
-        setMail(e.target.value);
-        statusInputs()
-    }
+  const resetForm = useCallback(
+    (newValues = {}, newErrors = {}, newIsValid = false) => {
+      setValues(newValues);
+      setErrors(newErrors);
+      setIsValid(newIsValid);
+    },
+    [setValues, setErrors, setIsValid]
+  );
 
-    const statusInputs = () => {
-        console.log(name.length, 'name')
-        console.log(mail.length, 'mail')
-        { (name.length && mail.length >= 2) ? setInputStatus(true) : setInputStatus(false) }
-    }
+  useEffect(() => {
+    resetForm();
+  }, [resetForm]);
 
-    return (
-        <div className='profile__content'>
-            <div className='profile__box first'>
-                <p className='profile__name left'>Имя</p>
-                <hr className='profile__line' />
-                <p className='profile__name left'>E-mail</p>
-            </div>
-            <form className='profileForm'>
-                <input className='profileForm__input' placeholder={props.userInfo.name} onChange={handleChangeName} ></input>
-                <hr className='form__line' />
-                <input className='profileForm__input' placeholder={props.userInfo.email} onChange={handleChangeMail} ></input>
-                <ButtonSave inputStatus={inputStatus} />
-            </form>
-        </div>
-    )
-}
+  const handleSubmitForm = (e) => {
+      e.preventDefault()
+      props.userValues({...values})
+    //   console.log({...values}, '000')
+  }
 
-export default ProfileForm
+  return (
+    <div className="profile__content">
+      <div className="profile__box first">
+        <p className="profile__name left">Имя</p>
+        <hr className="profile__line" />
+        <p className="profile__name left">E-mail</p>
+      </div>
+      <form className="profileForm" onSubmit={handleSubmitForm}>
+        <input
+          className="profileForm__input"
+          id="name"
+          name="name"
+          required
+          placeholder={props.userInfo.name}
+          onChange={handleChange}
+        ></input>
+        <hr className="form__line" />
+        <input
+          id="email"
+          name="email"
+          type="email"
+          className="profileForm__input"
+          placeholder={props.userInfo.email}
+          required
+          onChange={handleChange}
+        ></input>
+        <ButtonSave inputStatus={isValid} />
+      </form>
+    </div>
+  );
+};
+
+export default ProfileForm;

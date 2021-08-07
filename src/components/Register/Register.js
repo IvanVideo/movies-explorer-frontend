@@ -1,39 +1,38 @@
 import "./Register.css";
 import logo from "../../images/logo.svg";
 import { Link, BrowserRouter } from "react-router-dom";
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 
 const Register = (props) => {
-  const [name, setName] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [isEmpty, setIsEmpty] = React.useState(false);
-  console.log(isEmpty,'00')
-  console.log(name.length)
-  console.log(email.length)
-  console.log(password.length)
+  const [values, setValues] = React.useState({});
+  const [errors, setErrors] = React.useState({});
+  const [isValid, setIsValid] = React.useState(false);
+
+  const handleChange = (event) => {
+    const target = event.target;
+    const name = target.name;
+    const value = target.value;
+    setValues({ ...values, [name]: value });
+    setErrors({ ...errors, [name]: target.validationMessage });
+    setIsValid(target.closest("form").checkValidity());
+  };
+
+  const resetForm = useCallback(
+    (newValues = {}, newErrors = {}, newIsValid = false) => {
+      setValues(newValues);
+      setErrors(newErrors);
+      setIsValid(newIsValid);
+    },
+    [setValues, setErrors, setIsValid]
+  );
 
   useEffect(() => {
-    if(name.length && email.length && password.length === 0) {
-      setIsEmpty(true)
-    }
-    }, [])
-
-  const handleChangeName = (e) => {
-    setName(e.target.value);
-  };
-
-  const handleChangeEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handleChangePassword = (e) => {
-    setPassword(e.target.value);
-  };
+    resetForm();
+  }, [resetForm]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.onRegistrInfo({ name, email, password });
+    props.onRegistrInfo({...values});
   };
 
   return (
@@ -41,17 +40,41 @@ const Register = (props) => {
       <div className="register__conteiner">
         <img className="register__svg" alt="logo" src={logo} />
         <h1 className="register__title">Добро пожаловать!</h1>
-        <form className="form" onSubmit={handleSubmit} >
+        <form className="form" onSubmit={handleSubmit}>
           <label className="form__label">Имя</label>
-          <input className="form__input" required onChange={handleChangeName} />
+          <input
+            id="name"
+            name="name"
+            className="form__input"
+            required
+            onChange={handleChange}
+          />
+          <span id="name" className="form__error"></span>
           <label className="form__label">E-mail</label>
-          <input className="form__input" required type="email" onChange={handleChangeEmail} />
+          <input
+            id="email"
+            name="email"
+            className="form__input"
+            required
+            type="email"
+            onChange={handleChange}
+          />
+          <span id="email" className="form__error"></span>
           <label className="form__label">Пароль</label>
-          <input className="form__input" required onChange={handleChangePassword} />
-          <span id="form-err" className="form__error">
-            Что-то пошло не так...
-          </span>
-          <button className={isEmpty ? "register__button" : 'unvalible'} disabled={isEmpty ? true : false}>Зарегистрироваться</button>
+          <input
+            id="password"
+            name="password"
+            className="form__input"
+            required
+            onChange={handleChange}
+          />
+          <span id="password" className="form__error"></span>
+          <button
+            className={isValid ? "register__button" : "unvalible"}
+            disabled={isValid ? false : true }
+          >
+            Зарегистрироваться
+          </button>
         </form>
         <div className="register__footer">
           <p className="register__text">Уже зарегистрированы?</p>

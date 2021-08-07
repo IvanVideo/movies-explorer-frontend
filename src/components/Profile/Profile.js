@@ -5,16 +5,10 @@ import ButtonSave from '../ButtonSave/ButtonSave';
 import ProfileForm from '../ProfileForm/ProfileForm';
 
 const Profile = (props) => {
-    // console.log(props.userInfo)
     const [isActive, setIsActive] = React.useState(false);
-    // const [inputStatus, setInputStatus] = React.useState(false);
 
     const changeStatus = () => {
         setIsActive(!isActive)
-    }
-
-    const statusInputs = (data) => {
-        console.log(data)
     }
 
     return (
@@ -23,7 +17,7 @@ const Profile = (props) => {
             <div className='profile__conteiner'>
                 <h1 className='profile__title'>Привет, Иван!</h1>
                 <div className='profile__content'>
-                    {isActive ? <ProfileForm userInfo={props.userInfo} /> :
+                    {isActive ? <ProfileForm userInfo={props.userInfo} userValues={props.updateUserInfo} /> :
                         <>
                             <div className='profile__box first'>
                                 <p className='profile__name left'>Имя</p>
@@ -32,14 +26,14 @@ const Profile = (props) => {
                             </div>
                             <div className='profile__box second'>
                                 <p className={isActive ? 'profile__name notVisible' : 'profile__name'}>{props.userInfo.name}</p>
-                                <hr className='profile-line' />
+                                <hr className='profile__line' />
                                 <p className={isActive ? 'profile__name notVisible' : 'profile__name'}>{props.userInfo.email}</p>
                             </div>
                         </>
                     }
                 </div>
-                <button className={isActive ? 'profile-button notVisible' : 'profile-button'} onClick={changeStatus} >Редактировать</button>
-                <button className={isActive ? 'profile-button profile-link notVisible' : 'profile-button profile-link'} onClick={props.logout} >Выйти из аккаунта</button>
+                <button className={isActive ? 'profile__button notVisible' : 'profile__button'} onClick={changeStatus} >Редактировать</button>
+                <button className={isActive ? 'profile__button profile__link notVisible' : 'profile__button profile__link'} onClick={props.logout} >Выйти из аккаунта</button>
             </div>
         </section>
     )

@@ -15,66 +15,68 @@ import Profile from "../Profile/Profile";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import React, { useEffect } from "react";
 import mainApi from "../../utils/MainApi";
-import moviesApi from '../../utils/MoviesApi';
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import moviesApi from "../../utils/MoviesApi";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 import { Route, Switch, useHistory, Redirect } from "react-router-dom";
 
 function App() {
-
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [isLiked, setIsLiked] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
   const [userFilmsArr, setUserFilmsArr] = React.useState({});
   const [isLoading, setIsLoading] = React.useState(false);
 
+  const [width, setWidth] = React.useState(
+    document.documentElement.clientWidth
+  );
+  const [height, setHeight] = React.useState(
+    document.documentElement.clientHeight
+  );
 
-  const [width, setWidth] = React.useState(document.documentElement.clientWidth);
-  const [height, setHeight] = React.useState(document.documentElement.clientHeight);
-
-  // console.log(`высота ${height}, ширина ${width}`)
   const history = useHistory();
 
   const tokenCheck = () => {
-    const jwt = localStorage.getItem('token');
+    const jwt = localStorage.getItem("token");
     if (jwt && jwt !== null) {
-      mainApi.checkToken(jwt)
+      mainApi
+        .checkToken(jwt)
         .then((res) => {
           setLoggedIn(true);
           history.push("/movies");
         })
         .catch((err) => {
-          console.log(err)
-        })
+          console.log(err);
+        });
     } else {
-      return
+      return;
     }
-  }
+  };
 
   useEffect(() => {
     tokenCheck();
-    const jwt = localStorage.getItem('token');
-    mainApi.getUserInfo(jwt)
-      .then(userInfo => {
-        setCurrentUser(userInfo)
+    const jwt = localStorage.getItem("token");
+    mainApi
+      .getUserInfo(jwt)
+      .then((userInfo) => {
+        setCurrentUser(userInfo);
       })
       .catch((err) => {
-        console.log(err)
-      })
+        console.log(err);
+      });
     const handleResize = () => {
       setWidth(document.documentElement.clientWidth);
       setHeight(document.documentElement.clientHeight);
-    }
-    window.addEventListener('resize', handleResize)
-  }, [])
-
+    };
+    window.addEventListener("resize", handleResize);
+  }, []);
 
   const registerUser = ({ name, email, password }) => {
     return mainApi
       .register({ name, email, password })
       .then((res) => {
-        setUserInfo({ email: res.data.email, name: res.data.name });
+        setCurrentUser({ email: res.data.email, name: res.data.name });
         history.push("/signin");
       })
       .catch((err) => {
@@ -83,38 +85,49 @@ function App() {
   };
 
   const login = ({ email, password }) => {
-    return mainApi
-      .authorize({ email, password })
-      .then((res) => {
-        localStorage.setItem('token', res.token);
-        setLoggedIn(true);
-        tokenCheck();
-        console.log('000');
-        history.push("/movies")
-      })
-  }
+    return mainApi.authorize({ email, password }).then((res) => {
+      localStorage.setItem("token", res.token);
+      setLoggedIn(true);
+      tokenCheck();
+      history.push("/movies");
+    });
+  };
 
   //Api запрос фильмов и поиск в нем фильмов по результату поиска
   const enterValue = (data) => {
     setIsLoading(true);
-    moviesApi.getFilms()
-      .then((dataMovies) => {
-        let serchResultArray = dataMovies.filter(item => item.nameRU.includes(data))
-        setUserFilmsArr(serchResultArray)
-        setIsLoading(false);
-      })
-  }
+    moviesApi.getFilms().then((dataMovies) => {
+      let serchResultArray = dataMovies.filter((item) =>
+        item.nameRU.includes(data)
+      );
+      setUserFilmsArr(serchResultArray);
+      setIsLoading(false);
+    });
+  };
 
   const logout = () => {
-    localStorage.removeItem('token');
-    history.push('/');
-  }
+    localStorage.removeItem("token");
+    history.push("/");
+  };
 
   const handleLikeClick = (card) => {
-    const jwt = localStorage.getItem('token');
-    console.log(card)
+    const jwt = localStorage.getItem("token");
+    console.log(card);
     // setIsLiked
-  }
+  };
+
+  const updateUserInfo = ({ name, email }) => {
+    const jwt = localStorage.getItem("token");
+    mainApi
+      .updateUserInfo({ name, email, jwt })
+      .then((res) => {
+        setCurrentUser({ email: res.data.email, name: res.data.name });
+        console.log(res, "ответ");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -158,12 +171,12 @@ function App() {
             loggedIn={loggedIn}
             component={Profile}
             logout={logout}
+            updateUserInfo={updateUserInfo}
             userInfo={currentUser}
           />
           <Route exact path="/">
             {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />}
           </Route>
-
         </Switch>
         {/* <Header /> */}
 

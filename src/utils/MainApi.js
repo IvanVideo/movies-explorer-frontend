@@ -60,6 +60,23 @@ class MainApi {
             })
     }
 
+    updateUserInfo({ name, email, jwt }) {
+        console.log({ email: email, name: name }, 'отправляем на бэк')
+        return fetch(`${this._baseUrl}/me`, {
+            credentials: 'include',
+            method: 'PATCH',
+            headers: {
+                authorization: `Bearer ${jwt}`,
+                'Content-Type': 'application/json'
+              },
+            body: JSON.stringify({
+                email: email,
+                name: name
+            })
+        })
+        .then(res => this._checkResponse(res));
+    }
+
 }
 
 const config = {
