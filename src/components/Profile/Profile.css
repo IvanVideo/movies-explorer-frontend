@@ -57,16 +57,6 @@
     margin: 16px 0;
 }
 
-.profile__link {
-    font-family: 'Inter', 'Arial', 'Helvetica';
-    font-weight: 400;
-    font-size: 13px;
-    line-height: 16px;
-    text-decoration: none;
-    color: red;
-    margin-top: 16px;
-}
-
 .profile__button {
     font-family: 'Inter', 'Arial', 'Helvetica';
     font-weight: 400;
@@ -81,6 +71,16 @@
 
 .profile__button:hover {
     cursor: pointer;
+}
+
+.profile__link {
+    font-family: 'Inter', 'Arial', 'Helvetica';
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    text-decoration: none;
+    color: red;
+    margin-top: 16px;
 }
 
 .left {

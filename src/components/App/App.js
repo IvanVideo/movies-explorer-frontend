@@ -8,7 +8,6 @@ import Promo from "../Promo/Promo";
 import NavTab from "../NavTab/NavTab";
 import AboutProject from "../AboutProject/AboutProject";
 import AboutMe from "../AboutMe/AboutMe";
-import Header from "../Header/Header";
 import Portfolio from "../Portfolio/Portfolio";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Profile from "../Profile/Profile";
@@ -27,6 +26,7 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [userFilmsArr, setUserFilmsArr] = React.useState({});
   const [isLoading, setIsLoading] = React.useState(false);
+  // const [savedMoviesArr, setSavedMoviesArr] = React.useState({});
 
   const [width, setWidth] = React.useState(
     document.documentElement.clientWidth
@@ -96,13 +96,52 @@ function App() {
   //Api запрос фильмов и поиск в нем фильмов по результату поиска
   const enterValue = (data) => {
     setIsLoading(true);
-    moviesApi.getFilms().then((dataMovies) => {
-      let serchResultArray = dataMovies.filter((item) =>
-        item.nameRU.includes(data)
-      );
+    if (localStorage.getItem("movies")) {
+      let films = JSON.parse(localStorage.getItem("movies"));
+      let serchResultArray = films.filter((item) => item.nameRU.includes(data));
       setUserFilmsArr(serchResultArray);
       setIsLoading(false);
-    });
+    } else {
+      moviesApi.getFilms().then((dataMovies) => {
+        localStorage.setItem("movies", JSON.stringify(dataMovies));
+        let savedMoviesArr = [];
+        localStorage.setItem("savedMovies", JSON.stringify(savedMoviesArr));
+      });
+      setIsLoading(false);
+    }
+  };
+
+  //Сохранение фильмов
+  const savedFilm = (data) => {
+    console.log(data);
+    const jwt = localStorage.getItem("token");
+    mainApi
+      .saveFilm({ data, jwt })
+      .then((res) => {
+        console.log(res, "ответ с бэка на создание");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const checkStatusLike = (data) => {
+    let dataFilms = JSON.parse(localStorage.getItem("savedMovies"));
+    console.log(dataFilms, "что есть");
+    if (dataFilms.length == 0) {
+      return;
+    } else {
+      for (let i = 0; i < dataFilms.length; i++) {
+        if (dataFilms[i].id === data.id) {
+          console.log("одинаковые");
+          setIsLiked(true);
+        } else {
+          console.log("разные");
+          setIsLiked(false);
+        }
+      }
+    }
+    return;
   };
 
   const logout = () => {
@@ -113,7 +152,6 @@ function App() {
   const handleLikeClick = (card) => {
     const jwt = localStorage.getItem("token");
     console.log(card);
-    // setIsLiked
   };
 
   const updateUserInfo = ({ name, email }) => {
@@ -122,12 +160,64 @@ function App() {
       .updateUserInfo({ name, email, jwt })
       .then((res) => {
         setCurrentUser({ email: res.data.email, name: res.data.name });
-        console.log(res, "ответ");
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  const removeCard = (data) => {
+    let id = data._id;
+    const jwt = localStorage.getItem("token");
+    mainApi.deleteCard({ id, jwt }).card((res) => {
+      console.log(res, "ответ с бэка");
+    });
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  const statusLike = () => {
+    const dataSaveMocies = JSON.parse(localStorage.getItem("savedMomies"));
+    console.log(dataSaveMocies, '000')
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -149,7 +239,6 @@ function App() {
             <Footer />
           </Route>
 
-          {/* <MoviesCardList path="/movies" enterValue={enterValue} handleLikeClick={handleLikeClick} isLoading={isLoading} dataFilms={userFilmsArr}  /> */}
           <ProtectedRoute
             path="/movies"
             loggedIn={loggedIn}
@@ -157,14 +246,18 @@ function App() {
             isLoading={isLoading}
             widthWindow={width}
             // serchValue={serchValue}
+            // savedMoviesArr={savedMoviesArr}
             component={MoviesCardList}
             enterValue={enterValue}
             handleLikeClick={handleLikeClick}
+            savedFilm={savedFilm}
+            isLiked={isLiked}
           />
           <ProtectedRoute
             path="/saved-movies"
             loggedIn={loggedIn}
             component={SavedMovies}
+            removeCard={removeCard}
           />
           <ProtectedRoute
             path="/profile"

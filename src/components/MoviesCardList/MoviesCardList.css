@@ -10,7 +10,7 @@
     width: 100%;
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: repeat(6, 134px);
+    grid-template-rows: repeat(auto, 134px);
     grid-row-gap: 40px;
     padding-top: 60px;
 }
@@ -53,7 +53,7 @@
 
 @media screen and (max-width: 768px) {
     .moviesCardList__conteiner {
-        grid-template-rows: repeat(7, 232px);
+        grid-template-rows: repeat(auto, 232px);
         grid-row-gap: 20px;
         padding-top: 40px;
     }
