@@ -10,35 +10,20 @@ import checkbox from "../../images/check.svg";
 import checkbox2 from "../../images/black.svg";
 
 const SavedMovies = (props) => {
-  const [saveFilms, setSaveFilms] = React.useState({});
-
-  // const [arrayShortFilms, setArrayShortFilms] = React.useState({});
-  const [renderStatus, setRenderStatus] = React.useState(true);
-  console.log(props.savedArrFilms, "что в сохраненках");
-
-  // useEffect(() => {
-  //   const jwt = localStorage.getItem("token");
-  //   mainApi.getFilms(jwt).then((saveDataFilms) => {
-  //     setSaveFilms(saveDataFilms);
-  //     localStorage.setItem("savedMomies", saveDataFilms);
-  //   });
-  // }, []);
-
+  const [inputValue, setInputValue] = React.useState("");
+  const [checkboxState, setCheckboxState] = React.useState(false);
+  const [arrayShortFilmsSaved, setArrayShortFilmsSaved] = React.useState({});
   let cardsArray = Array.from(props.savedArrFilms);
-
-  const shortFilmsStatus = (data) => {
-    let shortFilms = JSON.parse(localStorage.getItem("shortMovies"));
-    // setArrayShortFilms(shortFilms);
-    setRenderStatus(data);
-  };
 
   const removeFilm = (data) => {
     props.removeCard(data);
   };
 
-
-  const [inputValue, setInputValue] = React.useState("");
-  const [checkboxState, setCheckboxState] = React.useState(false);
+  const shortFilmsStatus = () => {
+    setCheckboxState(!checkboxState);
+    let intersection = cardsArray.filter((item) => item.duration <= 40);
+    setArrayShortFilmsSaved(intersection);
+  };
 
   const handleChangeInputValue = (e) => {
     setInputValue(e.target.value);
@@ -47,11 +32,6 @@ const SavedMovies = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     props.enterValueSaved(inputValue);
-  };
-
-  const handleShortFilmsClick = () => {
-    setCheckboxState(!checkboxState);
-    // props.shortFilmsStatus(checkboxState);
   };
 
   return (
@@ -77,7 +57,7 @@ const SavedMovies = (props) => {
                   type="checkbox"
                   className="searchForm__checkbox"
                   id="id1"
-                  onChange={handleShortFilmsClick}
+                  onChange={shortFilmsStatus}
                 />
                 <label htmlFor="id1">
                   <img
@@ -91,18 +71,22 @@ const SavedMovies = (props) => {
             </form>
           </div>
         </section>
-        {/* <SearchForm
-          shortFilmsStatus={shortFilmsStatus}
-          shortFilms={props.shortFilms}
-        /> */}
         <div className="savedMoviesCardList__conteiner">
-          {cardsArray.map((item) => (
-            <MoviesSavedCard
-              key={item._id}
-              card={item}
-              removeFilm={removeFilm}
-            />
-          ))}
+          {checkboxState
+            ? arrayShortFilmsSaved.map((item) => (
+                <MoviesSavedCard
+                  key={item._id}
+                  card={item}
+                  removeFilm={removeFilm}
+                />
+              ))
+            : cardsArray.map((item) => (
+                <MoviesSavedCard
+                  key={item._id}
+                  card={item}
+                  removeFilm={removeFilm}
+                />
+              ))}
         </div>
       </div>
       <Footer />
