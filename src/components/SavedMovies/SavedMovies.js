@@ -19,13 +19,11 @@ const SavedMovies = (props) => {
   }, []);
 
   const removeFilm = (data) => {
-    
     props.removeCard(data)
   }
 
   let cardsArray = Array.from(saveFilms);
-
-
+  console.log(cardsArray, 'сохраненки')
   return (
     <section className="savedMovies">
       <Header />
@@ -34,7 +32,7 @@ const SavedMovies = (props) => {
         <div className="savedMoviesCardList__conteiner">
           {cardsArray.map((item) => (
               <MoviesSavedCard
-              key={item.id}
+              key={item._id}
               card={item}
               removeFilm={removeFilm}
             />

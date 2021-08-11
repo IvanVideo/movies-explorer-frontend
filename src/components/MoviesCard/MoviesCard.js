@@ -10,7 +10,6 @@ const MoviesCard = (props) => {
   useEffect(() => {}, []);
   const checkLikeStatus = () => {
     const dataSaveMocies = JSON.parse(localStorage.getItem("savedMomies"));
-    console.log(dataSaveMocies, "000");
   };
 
   const changeStatus = () => {
@@ -32,7 +31,7 @@ const MoviesCard = (props) => {
       <img
         className="moviesCard__img"
         alt="picture"
-        src={`https://api.nomoreparties.co${card.image.url}`}
+        src={`https://api.nomoreparties.co/.${card.image.url}`}
       />
     </section>
   );

@@ -6,6 +6,7 @@ const MoviesSavedCard = (props) => {
 
     const [isLiked, setIsLiked] = React.useState(false);
     const [card, setCard] = React.useState({})
+
     const hours = Math.trunc(card.duration / 60)
     const minutes = card.duration % 60
     useEffect(() => {

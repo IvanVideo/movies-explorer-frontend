@@ -113,7 +113,6 @@ function App() {
 
   //Сохранение фильмов
   const savedFilm = (data) => {
-    console.log(data);
     const jwt = localStorage.getItem("token");
     mainApi
       .saveFilm({ data, jwt })
@@ -166,57 +165,19 @@ function App() {
       });
   };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   const removeCard = (data) => {
+    // console.log(data._id, '222')
     let id = data._id;
+    console.log(id, '222')
     const jwt = localStorage.getItem("token");
-    mainApi.deleteCard({ id, jwt }).card((res) => {
+    mainApi.deleteCard({ id, jwt }).then((res) => {
       console.log(res, "ответ с бэка");
     });
   };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   const statusLike = () => {
-    const dataSaveMocies = JSON.parse(localStorage.getItem("savedMomies"));
-    console.log(dataSaveMocies, '000')
+    let dataSaveMocies = JSON.parse(localStorage.getItem("savedMomies"));
+    // console.log(dataSaveMocies, '000')
   }
 
   return (

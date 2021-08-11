@@ -17,7 +17,7 @@ const MoviesCardList = (props) => {
   const handleButtonClick = () => {
     // cardsConteiner.scrollIntoView({ block: "center", behavior: "smooth" });
   };
-
+console.log(newCardsArray, 'карточки')
   return (
     <section className="moviesCardList">
       <Header widthWindow={props.widthWindow} />
