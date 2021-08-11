@@ -14,6 +14,7 @@ const SearchForm = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     props.enterValue(inputValue);
+    props.enterValueSaved(inputValue);
   };
 
   const handleShortFilmsClick = () => {

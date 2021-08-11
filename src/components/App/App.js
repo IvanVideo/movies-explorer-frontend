@@ -24,11 +24,10 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [isLiked, setIsLiked] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
-  const [savedFilmsArr, setSavedUserFilmsArr] = React.useState([]);
+  const [savedUserFilmsArr, setSavedUserFilmsArr] = React.useState([]);
   const [userFilmsArr, setUserFilmsArr] = React.useState({});
   const [isLoading, setIsLoading] = React.useState(false);
-  // const [savedMoviesArr, setSavedMoviesArr] = React.useState({});
-
+  console.log(savedUserFilmsArr, "9999");
   const [width, setWidth] = React.useState(
     document.documentElement.clientWidth
   );
@@ -101,24 +100,48 @@ function App() {
       let films = JSON.parse(localStorage.getItem("movies"));
       let serchResultArray = films.filter((item) => item.nameRU.includes(data));
       setUserFilmsArr(serchResultArray);
+      dataSaveFilms();
       setIsLoading(false);
     } else {
       moviesApi.getFilms().then((dataMovies) => {
         localStorage.setItem("movies", JSON.stringify(dataMovies));
-        shortFilms()
-        // let savedMoviesArr = [];
-        // localStorage.setItem("savedMovies", JSON.stringify(savedMoviesArr));
+        saveShortFilm();
+        dataSaveFilms();
       });
       setIsLoading(false);
     }
   };
 
+  const enterValueSaved = (data) => {
+    console.log(data, "0202");
+    let serchResultSaveArray = savedUserFilmsArr.filter((item) =>
+      item.nameRU.includes(data)
+    );
+    setSavedUserFilmsArr(serchResultSaveArray);
+  };
+
+  //Api запрос сохраненных фильмов
+  const dataSaveFilms = () => {
+    const jwt = localStorage.getItem("token");
+    mainApi.getFilms(jwt).then((res) => {
+      setSavedUserFilmsArr(res);
+    });
+  };
+
   //Филтрация короткометражек
   const shortFilms = () => {
     let arrayFilms = JSON.parse(localStorage.getItem("movies"));
-    let shortFilms = arrayFilms.filter(item => item.duration <= 40)
+    let shortFilms = arrayFilms.filter((item) => item.duration <= 40);
     localStorage.setItem("shortMovies", JSON.stringify(shortFilms));
-  }
+  };
+
+  // Филтрация сохраненных короткометражек
+  const saveShortFilm = () => {
+    let shortFilms = JSON.parse(localStorage.getItem("shortMovies"));
+    console.log(savedFilmsArr, shortFilms, "9090");
+  };
+  // Я БЕРУ МАССИВ ИЗ ЛОКАЛА С КОРОТКОМЕТРАЖКАМИ И СРАВНИВАЮ ЕГО С МАССИВОМ СОХРАНЕННЫХ ФИЛЬМОВ
+  // ПОТОМ РЕЗУЛЬТАТ ОТПРАВЛЯЮ ПРОПСОМ НА РЕНДИНГ
 
   //Сохранение фильмов
   const savedFilm = (data) => {
@@ -126,7 +149,22 @@ function App() {
     mainApi
       .saveFilm({ data, jwt })
       .then((res) => {
-        setSavedUserFilmsArr([res.data, ...savedFilmsArr]);
+        setSavedUserFilmsArr([res.data, ...savedUserFilmsArr]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  //Удаление фильмов
+  const removeCard = (data) => {
+    let id = data._id;
+    const jwt = localStorage.getItem("token");
+    mainApi
+      .deleteCard({ id, jwt })
+      .then(() => {
+        const newCards = savedUserFilmsArr.filter((item) => item._id !== id);
+        setSavedUserFilmsArr(newCards);
       })
       .catch((err) => {
         console.log(err);
@@ -148,16 +186,6 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-  };
-
-  const removeCard = (data) => {
-    // console.log(data._id, '222')
-    let id = data._id;
-    console.log(id, '222')
-    const jwt = localStorage.getItem("token");
-    mainApi.deleteCard({ id, jwt }).then((res) => {
-      console.log(res, "ответ с бэка");
-    });
   };
 
   return (
@@ -188,15 +216,18 @@ function App() {
             widthWindow={width}
             component={MoviesCardList}
             enterValue={enterValue}
+            enterValueSaved={enterValueSaved}
             savedFilm={savedFilm}
             isLiked={isLiked}
           />
           <ProtectedRoute
             path="/saved-movies"
             loggedIn={loggedIn}
-            savedArrFilms={savedFilmsArr}
+            savedArrFilms={savedUserFilmsArr}
+            shortFilms={shortFilms}
             component={SavedMovies}
             removeCard={removeCard}
+            enterValueSaved={enterValueSaved}
           />
           <ProtectedRoute
             path="/profile"

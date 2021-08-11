@@ -32,6 +32,7 @@ const MoviesCardList = (props) => {
       <div className="moviesCardList__position">
         <SearchForm
           enterValue={props.enterValue}
+          enterValueSaved={props.enterValueSaved}
           shortFilmsStatus={shortFilmsStatus}
         />
         <div className="moviesCardList__conteiner">
