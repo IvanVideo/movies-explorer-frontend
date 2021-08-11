@@ -27,6 +27,7 @@ const SavedMovies = (props) => {
 
   const handleChangeInputValue = (e) => {
     setInputValue(e.target.value);
+    props.enterValueSaved(inputValue);
   };
 
   const handleSubmit = (e) => {

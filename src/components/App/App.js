@@ -133,16 +133,11 @@ function App() {
     });
   };
 
-  //Филтрация короткометражек
+  //Фильтрация короткометражек
   const shortFilms = () => {
     let arrayFilms = JSON.parse(localStorage.getItem("movies"));
     let shortFilms = arrayFilms.filter((item) => item.duration <= 40);
     localStorage.setItem("shortMovies", JSON.stringify(shortFilms));
-  };
-
-  // Филтрация сохраненных короткометражек
-  const saveShortFilm = () => {
-    let shortFilms = JSON.parse(localStorage.getItem("shortMovies"));
   };
 
   //Сохранение фильмов

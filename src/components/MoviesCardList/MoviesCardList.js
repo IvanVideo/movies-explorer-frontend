@@ -13,13 +13,12 @@ const MoviesCardList = (props) => {
   
   let cardsArray = Array.from(props.dataFilms);
   let newCardsArray = cardsArray.slice(0, 7);
-
   const handleButtonClick = () => {
-
   };
 
+
   const shortFilmsStatus = (data) => {
-    let shortFilms = JSON.parse(localStorage.getItem("shortMovies"));
+    let shortFilms = props.dataFilms.filter((item) => item.duration <= 40);
     setArrayShortFilms(shortFilms);
     setRenderStatus(data);
   };
@@ -48,7 +47,7 @@ const MoviesCardList = (props) => {
           ) : renderStatus ? (
             newCardsArray.map((item) => (
               <MoviesCard
-                key={item}
+                key={item._id}
                 card={item}
                 handleLikeClick={props.handleLikeClick}
                 savedFilm={props.savedFilm}
@@ -59,7 +58,7 @@ const MoviesCardList = (props) => {
           ) : (
             arrayShortFilms.map((item) => (
               <MoviesCard
-                key={item}
+                key={item._id}
                 card={item}
                 handleLikeClick={props.handleLikeClick}
                 savedFilm={props.savedFilm}
