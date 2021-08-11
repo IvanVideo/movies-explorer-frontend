@@ -61,7 +61,7 @@ class MainApi {
   }
 
   updateUserInfo({ name, email, jwt }) {
-    // console.log({ email: email, name: name }, 'отправляем на бэк')
+    console.log({ email: email, name: name }, 'отправляем на бэк')
     return fetch(`${this._baseUrl}/me`, {
       credentials: "include",
       method: "PATCH",

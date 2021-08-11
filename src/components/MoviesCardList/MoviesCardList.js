@@ -10,14 +10,12 @@ const MoviesCardList = (props) => {
   const [arrayShortFilms, setArrayShortFilms] = React.useState({});
   const [renderStatus, setRenderStatus] = React.useState(true);
 
-  const cardsConteiner = document.querySelector(".moviesCardList-conteiner");
-  // console.log(props.widthWindow, 'ширина окна')
-
+  
   let cardsArray = Array.from(props.dataFilms);
   let newCardsArray = cardsArray.slice(0, 7);
 
   const handleButtonClick = () => {
-    // cardsConteiner.scrollIntoView({ block: "center", behavior: "smooth" });
+
   };
 
   const shortFilmsStatus = (data) => {
@@ -50,23 +48,23 @@ const MoviesCardList = (props) => {
           ) : renderStatus ? (
             newCardsArray.map((item) => (
               <MoviesCard
-                key={item.id}
+                key={item}
                 card={item}
                 handleLikeClick={props.handleLikeClick}
                 savedFilm={props.savedFilm}
                 savedMoviesArr={props.savedMoviesArr}
-                isLiked={props.isLiked}
+                savedUserFilmsArr={props.savedUserFilmsArr}
               />
             ))
           ) : (
             arrayShortFilms.map((item) => (
               <MoviesCard
-                key={item.id}
+                key={item}
                 card={item}
                 handleLikeClick={props.handleLikeClick}
                 savedFilm={props.savedFilm}
                 savedMoviesArr={props.savedMoviesArr}
-                isLiked={props.isLiked}
+                savedUserFilmsArr={props.savedUserFilmsArr}
               />
             ))
           )}

@@ -5,15 +5,13 @@ const MoviesCard = (props) => {
   const [isLiked, setIsLiked] = React.useState(false);
   const [card, setCard] = React.useState(props.card);
 
+
   const hours = Math.trunc(card.duration / 60);
   const minutes = card.duration % 60;
-  useEffect(() => {}, []);
-  const checkLikeStatus = () => {
-    const dataSaveMocies = JSON.parse(localStorage.getItem("savedMomies"));
-  };
 
   const changeStatus = () => {
     props.savedFilm(props.card);
+    setIsLiked(true)
   };
 
   return (

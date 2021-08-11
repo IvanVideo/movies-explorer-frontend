@@ -12,6 +12,7 @@
     line-height: 17px;
     position: absolute;
     right: 0px;
+    cursor: pointer;
 }
 
 .buttonSave__disabled {

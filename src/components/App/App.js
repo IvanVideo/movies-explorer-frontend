@@ -22,12 +22,11 @@ import { Route, Switch, useHistory, Redirect } from "react-router-dom";
 
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
-  const [isLiked, setIsLiked] = React.useState(false);
+  const [error, setError] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
   const [savedUserFilmsArr, setSavedUserFilmsArr] = React.useState([]);
   const [userFilmsArr, setUserFilmsArr] = React.useState({});
   const [isLoading, setIsLoading] = React.useState(false);
-  console.log(savedUserFilmsArr, "9999");
   const [width, setWidth] = React.useState(
     document.documentElement.clientWidth
   );
@@ -36,7 +35,6 @@ function App() {
   );
 
   const history = useHistory();
-
   const tokenCheck = () => {
     const jwt = localStorage.getItem("token");
     if (jwt && jwt !== null) {
@@ -72,6 +70,7 @@ function App() {
     window.addEventListener("resize", handleResize);
   }, []);
 
+  //Регистрация пользователя
   const registerUser = ({ name, email, password }) => {
     return mainApi
       .register({ name, email, password })
@@ -84,13 +83,20 @@ function App() {
       });
   };
 
+  //Логин пользователя
   const login = ({ email, password }) => {
-    return mainApi.authorize({ email, password }).then((res) => {
-      localStorage.setItem("token", res.token);
-      setLoggedIn(true);
-      tokenCheck();
-      history.push("/movies");
-    });
+    return mainApi
+      .authorize({ email, password })
+      .then((res) => {
+        localStorage.setItem("token", res.token);
+        setLoggedIn(true);
+        tokenCheck();
+        history.push("/movies");
+      })
+      .catch((err) => {
+        console.log(err);
+        setError(true)
+      });
   };
 
   //Api запрос фильмов и поиск в нем фильмов по результату поиска
@@ -113,7 +119,6 @@ function App() {
   };
 
   const enterValueSaved = (data) => {
-    console.log(data, "0202");
     let serchResultSaveArray = savedUserFilmsArr.filter((item) =>
       item.nameRU.includes(data)
     );
@@ -138,10 +143,7 @@ function App() {
   // Филтрация сохраненных короткометражек
   const saveShortFilm = () => {
     let shortFilms = JSON.parse(localStorage.getItem("shortMovies"));
-    console.log(savedFilmsArr, shortFilms, "9090");
   };
-  // Я БЕРУ МАССИВ ИЗ ЛОКАЛА С КОРОТКОМЕТРАЖКАМИ И СРАВНИВАЮ ЕГО С МАССИВОМ СОХРАНЕННЫХ ФИЛЬМОВ
-  // ПОТОМ РЕЗУЛЬТАТ ОТПРАВЛЯЮ ПРОПСОМ НА РЕНДИНГ
 
   //Сохранение фильмов
   const savedFilm = (data) => {
@@ -171,11 +173,13 @@ function App() {
       });
   };
 
+  //Резлогирование пользователя
   const logout = () => {
     localStorage.removeItem("token");
     history.push("/");
   };
 
+  //Редактирование инфы пользователя
   const updateUserInfo = ({ name, email }) => {
     const jwt = localStorage.getItem("token");
     mainApi
@@ -193,7 +197,7 @@ function App() {
       <div className="app">
         <Switch>
           <Route path="/signin">
-            <Login onLoginInfo={login} />
+            <Login onLoginInfo={login} error={error} />
           </Route>
           <Route path="/signup">
             <Register onRegistrInfo={registerUser} />
@@ -218,7 +222,7 @@ function App() {
             enterValue={enterValue}
             enterValueSaved={enterValueSaved}
             savedFilm={savedFilm}
-            isLiked={isLiked}
+            savedUserFilmsArr={savedUserFilmsArr}
           />
           <ProtectedRoute
             path="/saved-movies"
@@ -241,9 +245,6 @@ function App() {
             {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />}
           </Route>
         </Switch>
-        {/* <Header /> */}
-
-        {/* <Error /> */}
       </div>
     </CurrentUserContext.Provider>
   );

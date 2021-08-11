@@ -75,14 +75,14 @@ const SavedMovies = (props) => {
           {checkboxState
             ? arrayShortFilmsSaved.map((item) => (
                 <MoviesSavedCard
-                  key={item._id}
+                  key={item}
                   card={item}
                   removeFilm={removeFilm}
                 />
               ))
             : cardsArray.map((item) => (
                 <MoviesSavedCard
-                  key={item._id}
+                  key={item}
                   card={item}
                   removeFilm={removeFilm}
                 />

@@ -102,6 +102,10 @@
     margin-top: 10px;
 }
 
+.form__error_hide {
+    display: none;
+}
+
 @media screen and (max-width: 768px) {
     .login__conteiner {
         max-width: 260px;

@@ -32,7 +32,6 @@ const ProfileForm = (props) => {
   const handleSubmitForm = (e) => {
       e.preventDefault()
       props.userValues({...values})
-    //   console.log({...values}, '000')
   }
 
   return (

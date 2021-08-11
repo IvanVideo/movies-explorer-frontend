@@ -41,7 +41,7 @@ const Login = (props) => {
         <img className="login__svg" alt="logo" src={logo} />
         <h1 className="login__title">Рады видеть!</h1>
         <form className="form" onSubmit={handleSubmit}>
-          <label className="form__label">111@111.ru</label>
+          <label className="form__label">E-mail</label>
           <input
             className="form__input"
             id="email"
@@ -58,10 +58,16 @@ const Login = (props) => {
             required
             onChange={handleChange}
           />
-          <span id="form-err" className="form__error">
+          <span id="form-err" className={props.error ? "form__error" : 'form__error_hide'}>
             Что-то пошло не так...
           </span>
-          <button className="login__button">Войти</button>
+          {/* <button className="login__button">Войти</button> */}
+          <button
+            className={isValid ? "login__button" : "unvalible"}
+            disabled={isValid ? false : true}
+          >
+            Войти
+          </button>
         </form>
         <div className="login__footer">
           <p className="login__text">Ещё не зарегистрированы?</p>
