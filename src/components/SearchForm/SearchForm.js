@@ -1,43 +1,58 @@
-import './SearchForm.css';
+import "./SearchForm.css";
 import React, { useEffect } from "react";
-import checkbox from '../../images/check.svg';
-import checkbox2 from '../../images/black.svg';
+import checkbox from "../../images/check.svg";
+import checkbox2 from "../../images/black.svg";
 
-const SearchForm = ({ enterValue }) => {
+const SearchForm = (props) => {
+  const [inputValue, setInputValue] = React.useState("");
+  const [checkboxState, setCheckboxState] = React.useState(false);
 
-    const [inputValue, setInputValue] = React.useState('');
-    const [checkboxState, setCheckboxState] = React.useState(false);
+  const handleChangeInputValue = (e) => {
+    setInputValue(e.target.value);
+  };
 
-    const handleChangeInputValue = (e) => {
-        setInputValue(e.target.value)
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    props.enterValue(inputValue);
+  };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        enterValue(inputValue)
-    };
+  const handleShortFilmsClick = () => {
+    setCheckboxState(!checkboxState);
+    props.shortFilmsStatus(checkboxState);
+  };
 
-    const clickCheckbox = () => {
-        setCheckboxState(!checkboxState)
-        console.log(checkboxState)
 
-    }
+  return (
+    <section className="searchForm">
+      <div className="searchForm__conteiner">
+        <form className="searchForm__box" onSubmit={handleSubmit}>
+          <input
+            className="searchForm__input"
+            required
+            placeholder="Фильм"
+            onChange={handleChangeInputValue}
+          />
+          <input className="searchForm__button" type="submit" value="Поиск" />
+          <div className="searchForm__active">
+            <input
+              type="checkbox"
+              className="searchForm__checkbox"
+              id="id1"
+              onChange={handleShortFilmsClick}
+            />
+            <label htmlFor="id1">
+              <img
+                src={checkboxState ? checkbox : checkbox2}
+                alt="radiobutton"
+                className="searchForm-radio"
+              />
+            </label>
+            <p className="searchForm__shortfilms">Короткометражки</p>
+          </div>
+        </form>
+      </div>
+    </section>
+  );
+};
 
-    return (
-        <section className='searchForm'>
-            <div className='searchForm__conteiner'>
-                <form className='searchForm__box' onSubmit={handleSubmit} >
-                    <input className='searchForm__input' required placeholder="Фильм" onChange={handleChangeInputValue} />
-                    <input className='searchForm__button' type='submit' value='Поиск' />
-                    <div className='searchForm__active'>
-                        <input type="checkbox" className='searchForm__checkbox' id="id1" onChange={clickCheckbox} />
-                        <label htmlFor="id1"><img src={checkboxState ? checkbox : checkbox2} alt="radiobutton" className='searchForm-radio' /></label>
-                        <p className='searchForm__shortfilms'>Короткометражки</p>
-                    </div>
-                </form>
-            </div>
-        </section>
-    )
-}
-
-export default SearchForm
+export default SearchForm;

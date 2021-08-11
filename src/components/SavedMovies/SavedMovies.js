@@ -9,6 +9,7 @@ import mainApi from "../../utils/MainApi";
 
 const SavedMovies = (props) => {
   const [saveFilms, setSaveFilms] = React.useState({});
+  console.log(props.savedArrFilms, 'что в сохраненках')
 
   useEffect(() => {
     const jwt = localStorage.getItem("token");
@@ -22,7 +23,7 @@ const SavedMovies = (props) => {
     props.removeCard(data)
   }
 
-  let cardsArray = Array.from(saveFilms);
+  let cardsArray = Array.from(props.savedArrFilms);
   console.log(cardsArray, 'сохраненки')
   return (
     <section className="savedMovies">

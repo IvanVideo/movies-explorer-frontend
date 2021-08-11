@@ -24,6 +24,7 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [isLiked, setIsLiked] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
+  const [savedFilmsArr, setSavedUserFilmsArr] = React.useState([]);
   const [userFilmsArr, setUserFilmsArr] = React.useState({});
   const [isLoading, setIsLoading] = React.useState(false);
   // const [savedMoviesArr, setSavedMoviesArr] = React.useState({});
@@ -104,12 +105,20 @@ function App() {
     } else {
       moviesApi.getFilms().then((dataMovies) => {
         localStorage.setItem("movies", JSON.stringify(dataMovies));
-        let savedMoviesArr = [];
-        localStorage.setItem("savedMovies", JSON.stringify(savedMoviesArr));
+        shortFilms()
+        // let savedMoviesArr = [];
+        // localStorage.setItem("savedMovies", JSON.stringify(savedMoviesArr));
       });
       setIsLoading(false);
     }
   };
+
+  //Филтрация короткометражек
+  const shortFilms = () => {
+    let arrayFilms = JSON.parse(localStorage.getItem("movies"));
+    let shortFilms = arrayFilms.filter(item => item.duration <= 40)
+    localStorage.setItem("shortMovies", JSON.stringify(shortFilms));
+  }
 
   //Сохранение фильмов
   const savedFilm = (data) => {
@@ -117,40 +126,16 @@ function App() {
     mainApi
       .saveFilm({ data, jwt })
       .then((res) => {
-        console.log(res, "ответ с бэка на создание");
+        setSavedUserFilmsArr([res.data, ...savedFilmsArr]);
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  const checkStatusLike = (data) => {
-    let dataFilms = JSON.parse(localStorage.getItem("savedMovies"));
-    console.log(dataFilms, "что есть");
-    if (dataFilms.length == 0) {
-      return;
-    } else {
-      for (let i = 0; i < dataFilms.length; i++) {
-        if (dataFilms[i].id === data.id) {
-          console.log("одинаковые");
-          setIsLiked(true);
-        } else {
-          console.log("разные");
-          setIsLiked(false);
-        }
-      }
-    }
-    return;
-  };
-
   const logout = () => {
     localStorage.removeItem("token");
     history.push("/");
-  };
-
-  const handleLikeClick = (card) => {
-    const jwt = localStorage.getItem("token");
-    console.log(card);
   };
 
   const updateUserInfo = ({ name, email }) => {
@@ -174,11 +159,6 @@ function App() {
       console.log(res, "ответ с бэка");
     });
   };
-
-  const statusLike = () => {
-    let dataSaveMocies = JSON.parse(localStorage.getItem("savedMomies"));
-    // console.log(dataSaveMocies, '000')
-  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -206,17 +186,15 @@ function App() {
             dataFilms={userFilmsArr}
             isLoading={isLoading}
             widthWindow={width}
-            // serchValue={serchValue}
-            // savedMoviesArr={savedMoviesArr}
             component={MoviesCardList}
             enterValue={enterValue}
-            handleLikeClick={handleLikeClick}
             savedFilm={savedFilm}
             isLiked={isLiked}
           />
           <ProtectedRoute
             path="/saved-movies"
             loggedIn={loggedIn}
+            savedArrFilms={savedFilmsArr}
             component={SavedMovies}
             removeCard={removeCard}
           />

@@ -7,6 +7,8 @@ import React, { useEffect } from "react";
 import Preloader from "../Preloader/Preloader";
 
 const MoviesCardList = (props) => {
+  const [arrayShortFilms, setArrayShortFilms] = React.useState({});
+  const [renderStatus, setRenderStatus] = React.useState(true);
 
   const cardsConteiner = document.querySelector(".moviesCardList-conteiner");
   // console.log(props.widthWindow, 'ширина окна')
@@ -17,12 +19,21 @@ const MoviesCardList = (props) => {
   const handleButtonClick = () => {
     // cardsConteiner.scrollIntoView({ block: "center", behavior: "smooth" });
   };
-console.log(newCardsArray, 'карточки')
+
+  const shortFilmsStatus = (data) => {
+    let shortFilms = JSON.parse(localStorage.getItem("shortMovies"));
+    setArrayShortFilms(shortFilms);
+    setRenderStatus(data);
+  };
+
   return (
     <section className="moviesCardList">
       <Header widthWindow={props.widthWindow} />
       <div className="moviesCardList__position">
-        <SearchForm enterValue={props.enterValue} />
+        <SearchForm
+          enterValue={props.enterValue}
+          shortFilmsStatus={shortFilmsStatus}
+        />
         <div className="moviesCardList__conteiner">
           <h1
             className={
@@ -35,8 +46,19 @@ console.log(newCardsArray, 'карточки')
           </h1>
           {props.isLoading ? (
             <Preloader isLoading={props.isLoading} />
-          ) : (
+          ) : renderStatus ? (
             newCardsArray.map((item) => (
+              <MoviesCard
+                key={item.id}
+                card={item}
+                handleLikeClick={props.handleLikeClick}
+                savedFilm={props.savedFilm}
+                savedMoviesArr={props.savedMoviesArr}
+                isLiked={props.isLiked}
+              />
+            ))
+          ) : (
+            arrayShortFilms.map((item) => (
               <MoviesCard
                 key={item.id}
                 card={item}

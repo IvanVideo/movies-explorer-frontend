@@ -32,6 +32,10 @@
     display: none;
 }
 
+.searchForm-radio {
+    cursor: pointer;
+}
+
 .searchForm__box{
     width: 100%;
     padding-bottom: 44px;
