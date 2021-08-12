@@ -9,10 +9,12 @@ import Preloader from "../Preloader/Preloader";
 const MoviesCardList = (props) => {
   const [arrayShortFilms, setArrayShortFilms] = React.useState({});
   const [renderStatus, setRenderStatus] = React.useState(true);
-
-  let cardsArray = Array.from(props.dataFilms);
-  let newCardsArray = cardsArray.slice(0, 7);
-  const handleButtonClick = () => {
+  const [visibleItem, setVisibleItem] = React.useState(7);
+  const cardsConteiner = document.querySelector(".moviesCardList__button");
+  // console.log(props.isLiked, "что пришло");
+  const showMorItems = () => {
+    setVisibleItem(visibleItem + 1);
+    cardsConteiner.scrollIntoView({ block: "start", behavior: "smooth" });
   };
 
   const shortFilmsStatus = (data) => {
@@ -43,16 +45,19 @@ const MoviesCardList = (props) => {
           {props.isLoading ? (
             <Preloader isLoading={props.isLoading} />
           ) : renderStatus ? (
-            newCardsArray.map((item) => (
-              <MoviesCard
-                key={item.id}
-                card={item}
-                handleLikeClick={props.handleLikeClick}
-                savedFilm={props.savedFilm}
-                savedMoviesArr={props.savedMoviesArr}
-                savedUserFilmsArr={props.savedUserFilmsArr}
-              />
-            ))
+            props.dataFilms
+              .slice(0, visibleItem)
+              .map((item) => (
+                <MoviesCard
+                  key={item.id}
+                  card={item}
+                  handleLikeClick={props.handleLikeClick}
+                  savedFilm={props.savedFilm}
+                  savedMoviesArr={props.savedMoviesArr}
+                  savedUserFilmsArr={props.savedUserFilmsArr}
+                  isLiked={props.isLiked}
+                />
+              ))
           ) : (
             arrayShortFilms.map((item) => (
               <MoviesCard
@@ -66,7 +71,14 @@ const MoviesCardList = (props) => {
             ))
           )}
         </div>
-        <button className="moviesCardList__button" onClick={handleButtonClick}>
+        <button
+          className={
+            props.dataFilms.length === 0
+              ? "moviesCardList__button emptySearch__notVisible"
+              : "moviesCardList__button"
+          }
+          onClick={showMorItems}
+        >
           Ещё
         </button>
       </div>

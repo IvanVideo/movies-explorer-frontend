@@ -25,7 +25,7 @@ function App() {
   const [error, setError] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
   const [savedUserFilmsArr, setSavedUserFilmsArr] = React.useState([]);
-  const [userFilmsArr, setUserFilmsArr] = React.useState({});
+  const [userFilmsArr, setUserFilmsArr] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const [width, setWidth] = React.useState(
     document.documentElement.clientWidth
@@ -96,7 +96,7 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-        setError(true)
+        setError(true);
       });
   };
 
@@ -156,7 +156,6 @@ function App() {
 
   //Удаление фильмов
   const removeCard = (id) => {
-    console.log(id, '000')
     const jwt = localStorage.getItem("token");
     mainApi
       .deleteCard({ id, jwt })

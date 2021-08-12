@@ -61,7 +61,7 @@ class MainApi {
   }
 
   updateUserInfo({ name, email, jwt }) {
-    console.log({ email: email, name: name }, 'отправляем на бэк')
+    console.log({ email: email, name: name }, "отправляем на бэк");
     return fetch(`${this._baseUrl}/me`, {
       credentials: "include",
       method: "PATCH",
@@ -111,7 +111,8 @@ class MainApi {
     }).then((res) => this._checkResponse(res));
   }
 
-  deleteCard({id, jwt}) {
+  deleteCard({ id, jwt }) {
+    console.log(id)
     return fetch(`${this._baseUrl}/movies/${id}`, {
       credentials: "include",
       method: "DELETE",

@@ -3,13 +3,23 @@ import React, { useEffect } from "react";
 
 const MoviesCard = (props) => {
   const [isLiked, setIsLiked] = React.useState(false);
-
   const hours = Math.trunc(props.card.duration / 60);
   const minutes = props.card.duration % 60;
+  // console.log(props.savedUserFilmsArr, "в карточке");
 
   const changeStatus = () => {
     props.savedFilm(props.card);
-    setIsLiked(true)
+
+    // console.log(props.card.id, 'id карточки')
+    // for (let i = 0; i < props.savedUserFilmsArr.length; i++) {
+    //   if (props.savedUserFilmsArr[i]._id == props.card.id) {
+    //     console.log('0')
+    //     setIsLiked(true);
+    //   } else {
+    //     console.log('1')
+    //     setIsLiked(false);
+    //   }
+    // }
   };
 
   return (
@@ -19,7 +29,7 @@ const MoviesCard = (props) => {
         <p className="moviesCard__time">{`${hours}ч ${minutes}м`}</p>
         <button
           className={
-            isLiked ? "moviesCard__like activelike" : "moviesCard__like"
+            props.isLiked ? "moviesCard__like activelike" : "moviesCard__like"
           }
           onClick={changeStatus}
         />
