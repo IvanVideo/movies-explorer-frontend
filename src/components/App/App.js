@@ -67,6 +67,7 @@ function App() {
       setWidth(document.documentElement.clientWidth);
       setHeight(document.documentElement.clientHeight);
     };
+    // dataSaveFilms();
     window.addEventListener("resize", handleResize);
   }, []);
 
@@ -154,8 +155,8 @@ function App() {
   };
 
   //Удаление фильмов
-  const removeCard = (data) => {
-    let id = data._id;
+  const removeCard = (id) => {
+    console.log(id, '000')
     const jwt = localStorage.getItem("token");
     mainApi
       .deleteCard({ id, jwt })

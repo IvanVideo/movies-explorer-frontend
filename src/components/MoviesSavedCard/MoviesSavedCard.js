@@ -12,7 +12,7 @@ const MoviesSavedCard = (props) => {
       }, []);
 
     const removeCard = () => {
-        props.removeFilm(props.card)
+        props.removeFilm(props.card._id)
     }
 
 
