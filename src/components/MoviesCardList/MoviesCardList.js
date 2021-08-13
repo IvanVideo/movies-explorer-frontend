@@ -11,7 +11,8 @@ const MoviesCardList = (props) => {
   const [renderStatus, setRenderStatus] = React.useState(true);
   const [visibleItem, setVisibleItem] = React.useState(7);
   const cardsConteiner = document.querySelector(".moviesCardList__button");
-  console.log(props.error, "что пришло");
+
+
   const showMorItems = () => {
     setVisibleItem(visibleItem + 1);
     cardsConteiner.scrollIntoView({ block: "start", behavior: "smooth" });
@@ -33,15 +34,28 @@ const MoviesCardList = (props) => {
           shortFilmsStatus={shortFilmsStatus}
         />
         <div className="moviesCardList__conteiner">
-          <h1
-            className={
-              props.dataFilms.length === 0
-                ? "emptySearch"
-                : "emptySearch__notVisible"
-            }
-          >
-            Ничего не найдено
-          </h1>
+          {props.error ? (
+            <h1
+              className={
+                props.error ? "emptySearch" : "emptySearch__notVisible"
+              }
+            >
+              Во время запроса произошла ошибка. Возможно, проблема с
+              соединением или сервер недоступен. Подождите немного и попробуйте
+              ещё раз
+            </h1>
+          ) : (
+            <h1
+              className={
+                props.dataFilms.length === 0
+                  ? "emptySearch"
+                  : "emptySearch__notVisible"
+              }
+            >
+              Ничего не найдено
+            </h1>
+          )}
+
           {props.isLoading ? (
             <Preloader isLoading={props.isLoading} />
           ) : renderStatus ? (

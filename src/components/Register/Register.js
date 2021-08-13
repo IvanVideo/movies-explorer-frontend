@@ -34,7 +34,6 @@ const Register = (props) => {
     e.preventDefault();
     props.onRegistrInfo({...values});
   };
-
   return (
     <section className="register">
       <div className="register__conteiner">
@@ -49,7 +48,7 @@ const Register = (props) => {
             required
             onChange={handleChange}
           />
-          <span id="name" className="form__error"></span>
+          <span id="name" className="form__error">{errors.name}</span>
           <label className="form__label">E-mail</label>
           <input
             id="email"
@@ -59,7 +58,7 @@ const Register = (props) => {
             type="email"
             onChange={handleChange}
           />
-          <span id="email" className="form__error"></span>
+          <span id="email" className="form__error">{errors.email}</span>
           <label className="form__label">Пароль</label>
           <input
             id="password"
@@ -68,7 +67,7 @@ const Register = (props) => {
             required
             onChange={handleChange}
           />
-          <span id="password" className="form__error"></span>
+          <span id="password" className="form__error">{errors.password}</span>
           <button
             className={isValid ? "register__button" : "unvalible"}
             disabled={isValid ? false : true }

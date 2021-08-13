@@ -106,6 +106,7 @@ function App() {
     if (localStorage.getItem("movies")) {
       let films = JSON.parse(localStorage.getItem("movies"));
       let serchResultArray = films.filter((item) => item.nameRU.includes(data));
+      localStorage.setItem("resultFilms", serchResultArray);
       setUserFilmsArr(serchResultArray);
       dataSaveFilms();
       setIsLoading(false);

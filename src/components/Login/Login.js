@@ -50,6 +50,9 @@ const Login = (props) => {
             required
             onChange={handleChange}
           />
+          <span id="email" className="form__error">
+            {errors.email}
+          </span>
           <label className="form__label">Пароль</label>
           <input
             id="password"
@@ -58,10 +61,15 @@ const Login = (props) => {
             required
             onChange={handleChange}
           />
-          <span id="form-err" className={props.error ? "form__error" : 'form__error_hide'}>
+          <span id="password" className="form__error">
+            {errors.password}
+          </span>
+          <span
+            id="form-err"
+            className={props.error ? "form__error" : "form__error_hide"}
+          >
             Что-то пошло не так...
           </span>
-          {/* <button className="login__button">Войти</button> */}
           <button
             className={isValid ? "login__button" : "unvalible"}
             disabled={isValid ? false : true}
