@@ -54,6 +54,7 @@ function App() {
 
   useEffect(() => {
     tokenCheck();
+    dataSaveFilms();
     const jwt = localStorage.getItem("token");
     mainApi
       .getUserInfo(jwt)

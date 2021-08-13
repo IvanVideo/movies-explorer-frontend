@@ -14,7 +14,7 @@ const SavedMovies = (props) => {
   const [checkboxState, setCheckboxState] = React.useState(false);
   const [arrayShortFilmsSaved, setArrayShortFilmsSaved] = React.useState({});
   let cardsArray = Array.from(props.savedArrFilms);
-  console.log(cardsArray, 'сохраненные карточки')
+  // console.log(cardsArray, 'сохраненные карточки')
   const removeFilm = (data) => {
     props.removeCard(data);
   };

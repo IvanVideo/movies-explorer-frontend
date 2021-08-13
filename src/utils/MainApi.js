@@ -61,7 +61,7 @@ class MainApi {
   }
 
   updateUserInfo({ data, jwt }) {
-    console.log( data , "отправляем на бэк");
+    console.log(data, "отправляем на бэк");
     return fetch(`${this._baseUrl}/users/me`, {
       credentials: "include",
       method: "PATCH",
@@ -112,7 +112,7 @@ class MainApi {
   }
 
   deleteCard({ id, jwt }) {
-    console.log(id)
+    console.log(id);
     return fetch(`${this._baseUrl}/movies/${id}`, {
       credentials: "include",
       method: "DELETE",
@@ -120,6 +120,7 @@ class MainApi {
         authorization: `Bearer ${jwt}`,
         "Content-Type": "application/json",
       },
+      body: JSON.stringify({}),
     }).then((res) => this._checkResponse(res));
   }
 }
