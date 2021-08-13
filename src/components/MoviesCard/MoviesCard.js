@@ -5,22 +5,23 @@ const MoviesCard = (props) => {
   const [isLiked, setIsLiked] = React.useState(false);
   const hours = Math.trunc(props.card.duration / 60);
   const minutes = props.card.duration % 60;
-  // console.log(props.savedUserFilmsArr, "в карточке");
+  console.log(props.savedUserFilmsArr, "сохраненные фильмы");
+  console.log(props.card, "карточка");
+  console.log(
+    props.savedUserFilmsArr.some((item) => item.movieId == props.card.id),
+    "finish"
+  );
 
-  const changeStatus = () => {
+  const handleSaveCard = () => {
     props.savedFilm(props.card);
-
-    // console.log(props.card.id, 'id карточки')
-    // for (let i = 0; i < props.savedUserFilmsArr.length; i++) {
-    //   if (props.savedUserFilmsArr[i]._id == props.card.id) {
-    //     console.log('0')
-    //     setIsLiked(true);
-    //   } else {
-    //     console.log('1')
-    //     setIsLiked(false);
-    //   }
-    // }
   };
+
+  useEffect(() => {
+    let isLiked = props.savedUserFilmsArr.some(
+      (item) => item.movieId == props.card.id
+    );
+    setIsLiked(isLiked);
+  }, []);
 
   return (
     <section className="moviesCard">
@@ -29,9 +30,9 @@ const MoviesCard = (props) => {
         <p className="moviesCard__time">{`${hours}ч ${minutes}м`}</p>
         <button
           className={
-            props.isLiked ? "moviesCard__like activelike" : "moviesCard__like"
+            isLiked ? "moviesCard__like activelike" : "moviesCard__like"
           }
-          onClick={changeStatus}
+          onClick={handleSaveCard}
         />
       </div>
       <img
