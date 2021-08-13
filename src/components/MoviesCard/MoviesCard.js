@@ -14,6 +14,7 @@ const MoviesCard = (props) => {
 
   const handleSaveCard = () => {
     props.savedFilm(props.card);
+    setIsLiked(true)
   };
 
   useEffect(() => {
