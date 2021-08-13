@@ -110,11 +110,17 @@ function App() {
       dataSaveFilms();
       setIsLoading(false);
     } else {
-      moviesApi.getFilms().then((dataMovies) => {
-        localStorage.setItem("movies", JSON.stringify(dataMovies));
-        saveShortFilm();
-        dataSaveFilms();
-      });
+      moviesApi
+        .getFilms()
+        .then((dataMovies) => {
+          localStorage.setItem("movies", JSON.stringify(dataMovies));
+          saveShortFilm();
+          dataSaveFilms();
+        })
+        .catch((err) => {
+          console.log(err);
+          setError(true);
+        });
       setIsLoading(false);
     }
   };
@@ -213,11 +219,12 @@ function App() {
             dataFilms={userFilmsArr}
             isLoading={isLoading}
             widthWindow={width}
+            savedUserFilmsArr={savedUserFilmsArr}
+            error={error}
             component={MoviesCardList}
             enterValue={enterValue}
             enterValueSaved={enterValueSaved}
             savedFilm={savedFilm}
-            savedUserFilmsArr={savedUserFilmsArr}
           />
           <ProtectedRoute
             path="/saved-movies"

@@ -11,7 +11,7 @@ const MoviesCardList = (props) => {
   const [renderStatus, setRenderStatus] = React.useState(true);
   const [visibleItem, setVisibleItem] = React.useState(7);
   const cardsConteiner = document.querySelector(".moviesCardList__button");
-  // console.log(props.isLiked, "что пришло");
+  console.log(props.error, "что пришло");
   const showMorItems = () => {
     setVisibleItem(visibleItem + 1);
     cardsConteiner.scrollIntoView({ block: "start", behavior: "smooth" });

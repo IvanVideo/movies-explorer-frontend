@@ -6,6 +6,7 @@ import checkbox2 from "../../images/black.svg";
 const SearchForm = (props) => {
   const [inputValue, setInputValue] = React.useState("");
   const [checkboxState, setCheckboxState] = React.useState(false);
+  const [status, setStatus] = React.useState(false);
 
   const handleChangeInputValue = (e) => {
     setInputValue(e.target.value);
@@ -13,8 +14,13 @@ const SearchForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.enterValue(inputValue);
-    props.enterValueSaved(inputValue);
+    if (inputValue == "") {
+      setStatus(true);
+    } else {
+      setStatus(false);
+      props.enterValue(inputValue);
+      props.enterValueSaved(inputValue);
+    }
   };
 
   const handleShortFilmsClick = () => {
@@ -22,14 +28,12 @@ const SearchForm = (props) => {
     props.shortFilmsStatus(checkboxState);
   };
 
-
   return (
     <section className="searchForm">
       <div className="searchForm__conteiner">
         <form className="searchForm__box" onSubmit={handleSubmit}>
           <input
             className="searchForm__input"
-            required
             placeholder="Фильм"
             onChange={handleChangeInputValue}
           />
@@ -49,6 +53,9 @@ const SearchForm = (props) => {
               />
             </label>
             <p className="searchForm__shortfilms">Короткометражки</p>
+            <span className={status ? "error" : "error__unvisible"}>
+              Нужно ввести ключевое слово
+            </span>
           </div>
         </form>
       </div>
