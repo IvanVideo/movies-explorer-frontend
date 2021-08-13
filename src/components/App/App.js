@@ -182,12 +182,13 @@ function App() {
   };
 
   //Редактирование инфы пользователя
-  const updateUserInfo = ({ name, email }) => {
+  const updateUserInfo = (data) => {
     const jwt = localStorage.getItem("token");
     mainApi
-      .updateUserInfo({ name, email, jwt })
+      .updateUserInfo({ data, jwt })
       .then((res) => {
         setCurrentUser({ email: res.data.email, name: res.data.name });
+        history.push("/movies");
       })
       .catch((err) => {
         console.log(err);

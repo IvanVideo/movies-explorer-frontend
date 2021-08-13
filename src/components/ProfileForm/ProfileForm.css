@@ -27,3 +27,32 @@
     border: none;
     background-color: #E8E8E8;
 }
+
+.propfile__name {
+    position: absolute;
+    top: 0px;
+    right: -170px;
+    width: 150px;
+}
+
+.propfile__email {
+    position: absolute;
+    top: 30px;
+    right: -220px;
+    width: 200px;
+}
+
+@media screen and (max-width: 768px) {
+    .propfile__name {
+        top: -30px;
+        right: -30px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .propfile__email {
+        top: 60px;
+        right: 0px;
+        text-align: right;
+    }
+}

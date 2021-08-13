@@ -60,9 +60,9 @@ class MainApi {
     });
   }
 
-  updateUserInfo({ name, email, jwt }) {
-    console.log({ email: email, name: name }, "отправляем на бэк");
-    return fetch(`${this._baseUrl}/me`, {
+  updateUserInfo({ data, jwt }) {
+    console.log( data , "отправляем на бэк");
+    return fetch(`${this._baseUrl}/users/me`, {
       credentials: "include",
       method: "PATCH",
       headers: {
@@ -70,8 +70,8 @@ class MainApi {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: email,
-        name: name,
+        email: data.email,
+        name: data.name,
       }),
     }).then((res) => this._checkResponse(res));
   }

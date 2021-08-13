@@ -30,9 +30,9 @@ const ProfileForm = (props) => {
   }, [resetForm]);
 
   const handleSubmitForm = (e) => {
-      e.preventDefault()
-      props.userValues({...values})
-  }
+    e.preventDefault();
+    props.userValues({ ...values });
+  };
 
   return (
     <div className="profile__content">
@@ -49,7 +49,10 @@ const ProfileForm = (props) => {
           required
           placeholder={props.userInfo.name}
           onChange={handleChange}
-        ></input>
+        />
+        <span id="name" className="form__error propfile__name">
+          {errors.name}
+        </span>
         <hr className="form__line" />
         <input
           id="email"
@@ -59,7 +62,10 @@ const ProfileForm = (props) => {
           placeholder={props.userInfo.email}
           required
           onChange={handleChange}
-        ></input>
+        />
+        <span id="email" className="form__error propfile__email">
+          {errors.email}
+        </span>
         <ButtonSave inputStatus={isValid} />
       </form>
     </div>
