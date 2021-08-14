@@ -38,3 +38,15 @@
 .notVisible {
     display: none;
 }
+
+@media screen and (max-width: 768px) {
+    .buttonSave__active {
+        width: 250px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .buttonSave__disabled {
+        width: 250px;
+    }
+}

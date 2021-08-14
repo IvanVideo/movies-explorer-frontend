@@ -1,6 +1,7 @@
 import "./Register.css";
 import logo from "../../images/logo.svg";
 import { Link, BrowserRouter } from "react-router-dom";
+import Preloader from "../Preloader/Preloader";
 import React, { useEffect, useCallback } from "react";
 
 const Register = (props) => {
@@ -32,7 +33,7 @@ const Register = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.onRegistrInfo({...values});
+    props.onRegistrInfo({ ...values });
   };
   return (
     <section className="register">
@@ -68,12 +69,14 @@ const Register = (props) => {
             onChange={handleChange}
           />
           <span id="password" className="form__error">{errors.password}</span>
-          <button
+          {props.isLoading ? (
+            <Preloader isLoading={props.isLoading} />
+          ) : <button
             className={isValid ? "register__button" : "unvalible"}
-            disabled={isValid ? false : true }
+            disabled={isValid ? false : true}
           >
             Зарегистрироваться
-          </button>
+          </button>}
         </form>
         <div className="register__footer">
           <p className="register__text">Уже зарегистрированы?</p>

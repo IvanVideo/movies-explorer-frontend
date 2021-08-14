@@ -23,6 +23,7 @@ import { Route, Switch, useHistory, Redirect } from "react-router-dom";
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [error, setError] = React.useState(false);
+  const [success, setSuccess] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
   const [savedUserFilmsArr, setSavedUserFilmsArr] = React.useState([]);
   const [userFilmsArr, setUserFilmsArr] = React.useState([]);
@@ -68,35 +69,41 @@ function App() {
       setWidth(document.documentElement.clientWidth);
       setHeight(document.documentElement.clientHeight);
     };
-    // dataSaveFilms();
     window.addEventListener("resize", handleResize);
   }, []);
 
   //Регистрация пользователя
   const registerUser = ({ name, email, password }) => {
+    setIsLoading(true)
     return mainApi
       .register({ name, email, password })
       .then((res) => {
         setCurrentUser({ email: res.data.email, name: res.data.name });
-        history.push("/signin");
+        setIsLoading(false);
+        setLoggedIn(true);
+        history.push("/movies");
       })
       .catch((err) => {
+        setIsLoading(false)
         console.log(err);
       });
   };
 
   //Логин пользователя
   const login = ({ email, password }) => {
+    setIsLoading(true)
     return mainApi
       .authorize({ email, password })
       .then((res) => {
         localStorage.setItem("token", res.token);
         setLoggedIn(true);
         tokenCheck();
+        setIsLoading(false)
         history.push("/movies");
       })
       .catch((err) => {
         console.log(err);
+        setIsLoading(false)
         setError(true);
       });
   };
@@ -184,14 +191,18 @@ function App() {
 
   //Редактирование инфы пользователя
   const updateUserInfo = (data) => {
+    setSuccess(false)
+    setIsLoading(true)
     const jwt = localStorage.getItem("token");
     mainApi
       .updateUserInfo({ data, jwt })
       .then((res) => {
         setCurrentUser({ email: res.data.email, name: res.data.name });
-        history.push("/movies");
+        setIsLoading(false)
+        setSuccess(true)
       })
       .catch((err) => {
+        setIsLoading(false)
         console.log(err);
       });
   };
@@ -201,10 +212,10 @@ function App() {
       <div className="app">
         <Switch>
           <Route path="/signin">
-            <Login onLoginInfo={login} error={error} />
+            <Login onLoginInfo={login} error={error} isLoading={isLoading} />
           </Route>
           <Route path="/signup">
-            <Register onRegistrInfo={registerUser} />
+            <Register onRegistrInfo={registerUser} isLoading={isLoading} />
           </Route>
           <Route exact path="/">
             <Promo />
@@ -241,10 +252,12 @@ function App() {
           <ProtectedRoute
             path="/profile"
             loggedIn={loggedIn}
+            isLoading={isLoading}
+            success={success}
+            userInfo={currentUser}
             component={Profile}
             logout={logout}
             updateUserInfo={updateUserInfo}
-            userInfo={currentUser}
           />
           <Route exact path="/">
             {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />}

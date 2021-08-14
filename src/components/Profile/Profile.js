@@ -1,7 +1,6 @@
 import './Profile.css';
 import React from 'react';
 import Header from '../Header/Header';
-import ButtonSave from '../ButtonSave/ButtonSave';
 import ProfileForm from '../ProfileForm/ProfileForm';
 
 const Profile = (props) => {
@@ -15,9 +14,9 @@ const Profile = (props) => {
         <section className='profile'>
             <Header />
             <div className='profile__conteiner'>
-                <h1 className='profile__title'>Привет, Иван!</h1>
+                <h1 className='profile__title'>Привет, {props.userInfo.name}!</h1>
                 <div className='profile__content'>
-                    {isActive ? <ProfileForm userInfo={props.userInfo} userValues={props.updateUserInfo} /> :
+                    {isActive ? <ProfileForm userInfo={props.userInfo} userValues={props.updateUserInfo} isLoading={props.isLoading} success={props.success} /> :
                         <>
                             <div className='profile__box first'>
                                 <p className='profile__name left'>Имя</p>

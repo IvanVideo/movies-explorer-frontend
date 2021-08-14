@@ -1,6 +1,7 @@
 import "./Login.css";
 import logo from "../../images/logo.svg";
 import { Link } from "react-router-dom";
+import Preloader from "../Preloader/Preloader";
 import React, { useEffect, useCallback } from "react";
 
 const Login = (props) => {
@@ -70,12 +71,14 @@ const Login = (props) => {
           >
             Что-то пошло не так...
           </span>
-          <button
+          {props.isLoading ? (
+            <Preloader isLoading={props.isLoading} />
+          ) : <button
             className={isValid ? "login__button" : "unvalible"}
             disabled={isValid ? false : true}
           >
             Войти
-          </button>
+          </button>}
         </form>
         <div className="login__footer">
           <p className="login__text">Ещё не зарегистрированы?</p>

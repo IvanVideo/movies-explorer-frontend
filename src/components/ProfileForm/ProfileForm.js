@@ -1,5 +1,6 @@
 import "./ProfileForm.css";
 import React, { useEffect, useCallback } from "react";
+import Preloader from "../Preloader/Preloader";
 import ButtonSave from "../ButtonSave/ButtonSave";
 
 const ProfileForm = (props) => {
@@ -40,6 +41,7 @@ const ProfileForm = (props) => {
         <p className="profile__name left">Имя</p>
         <hr className="profile__line" />
         <p className="profile__name left">E-mail</p>
+        <div className={props.success ? "profile__notice_position" : "profile__notice_position unvisible"}><h1 className="profile__notice">Данные успешно обновлены!</h1></div>
       </div>
       <form className="profileForm" onSubmit={handleSubmitForm}>
         <input
@@ -66,7 +68,9 @@ const ProfileForm = (props) => {
         <span id="email" className="form__error propfile__email">
           {errors.email}
         </span>
-        <ButtonSave inputStatus={isValid} />
+        {props.isLoading ? (
+          <div className="profile__preloader"><Preloader isLoading={props.isLoading} /></div>
+        ) : <ButtonSave inputStatus={isValid} />}
       </form>
     </div>
   );
