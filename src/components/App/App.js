@@ -23,6 +23,7 @@ import { Route, Switch, useHistory, Redirect } from "react-router-dom";
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [error, setError] = React.useState(false);
+  const [errorFilms, setErrorFilms] = React.useState(false);
   const [success, setSuccess] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
   const [savedUserFilmsArr, setSavedUserFilmsArr] = React.useState([]);
@@ -186,6 +187,7 @@ function App() {
   //Резлогирование пользователя
   const logout = () => {
     localStorage.removeItem("token");
+    setLoggedIn(false);
     history.push("/");
   };
 
@@ -218,7 +220,7 @@ function App() {
             <Register onRegistrInfo={registerUser} isLoading={isLoading} />
           </Route>
           <Route exact path="/">
-            <Promo />
+            <Promo loggedIn={loggedIn} />
             <NavTab />
             <AboutProject />
             <Techs />
@@ -234,7 +236,7 @@ function App() {
             isLoading={isLoading}
             widthWindow={width}
             savedUserFilmsArr={savedUserFilmsArr}
-            error={error}
+            errorFilms={errorFilms}
             component={MoviesCardList}
             enterValue={enterValue}
             enterValueSaved={enterValueSaved}

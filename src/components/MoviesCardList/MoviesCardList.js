@@ -34,7 +34,7 @@ const MoviesCardList = (props) => {
           shortFilmsStatus={shortFilmsStatus}
         />
         <div className="moviesCardList__conteiner">
-          {props.error ? (
+          {props.errorFilms ? (
             <h1
               className={
                 props.error ? "emptySearch" : "emptySearch__notVisible"
