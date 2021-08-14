@@ -2,12 +2,13 @@ import "./ProfileForm.css";
 import React, { useEffect, useCallback } from "react";
 import Preloader from "../Preloader/Preloader";
 import ButtonSave from "../ButtonSave/ButtonSave";
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 const ProfileForm = (props) => {
+  const currentUser = React.useContext(CurrentUserContext);
   const [values, setValues] = React.useState({});
   const [errors, setErrors] = React.useState({});
   const [isValid, setIsValid] = React.useState(false);
-
   const handleChange = (event) => {
     const target = event.target;
     const name = target.name;
@@ -28,6 +29,7 @@ const ProfileForm = (props) => {
 
   useEffect(() => {
     resetForm();
+    props.check(values)
   }, [resetForm]);
 
   const handleSubmitForm = (e) => {

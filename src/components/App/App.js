@@ -230,7 +230,7 @@ function App() {
             <Portfolio />
             <Footer />
           </Route>
-
+          
           <ProtectedRoute
             path="/movies"
             loggedIn={loggedIn}
