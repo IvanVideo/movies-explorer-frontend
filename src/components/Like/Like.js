@@ -2,9 +2,6 @@ import React, { useEffect } from 'react';
 
 
 const Like = (props) => {
-    // const [isLiked, setIsLiked] = React.useState(false);
-    // console.log(props.card, '1111')
-
     const changeStatus = () => {
         console.log(props.card.isLiked, '1111')
         if(props.card.isLiked === false) {

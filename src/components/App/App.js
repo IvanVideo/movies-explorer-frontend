@@ -113,8 +113,8 @@ function App() {
   const enterValue = (data) => {
     setIsLoading(true);
     if (localStorage.getItem("movies")) {
-      let films = JSON.parse(localStorage.getItem("movies"));
-      let serchResultArray = films.filter((item) => item.nameRU.includes(data));
+      const films = JSON.parse(localStorage.getItem("movies"));
+      const serchResultArray = films.filter((item) => item.nameRU.includes(data));
       localStorage.setItem("resultFilms", serchResultArray);
       setUserFilmsArr(serchResultArray);
       dataSaveFilms();
@@ -136,7 +136,7 @@ function App() {
   };
 
   const enterValueSaved = (data) => {
-    let serchResultSaveArray = savedUserFilmsArr.filter((item) =>
+    const serchResultSaveArray = savedUserFilmsArr.filter((item) =>
       item.nameRU.includes(data)
     );
     setSavedUserFilmsArr(serchResultSaveArray);
@@ -147,13 +147,15 @@ function App() {
     const jwt = localStorage.getItem("token");
     mainApi.getFilms(jwt).then((res) => {
       setSavedUserFilmsArr(res);
+    }).catch((err) => {
+      console.log(err);
     });
   };
 
   //Фильтрация короткометражек
   const shortFilms = () => {
-    let arrayFilms = JSON.parse(localStorage.getItem("movies"));
-    let shortFilms = arrayFilms.filter((item) => item.duration <= 40);
+    const arrayFilms = JSON.parse(localStorage.getItem("movies"));
+    const shortFilms = arrayFilms.filter((item) => item.duration <= 40);
     localStorage.setItem("shortMovies", JSON.stringify(shortFilms));
   };
 

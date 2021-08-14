@@ -19,7 +19,7 @@ const MoviesCardList = (props) => {
   };
 
   const shortFilmsStatus = (data) => {
-    let shortFilms = props.dataFilms.filter((item) => item.duration <= 40);
+    const shortFilms = props.dataFilms.filter((item) => item.duration <= 40);
     setArrayShortFilms(shortFilms);
     setRenderStatus(data);
   };

@@ -13,7 +13,7 @@ const SavedMovies = (props) => {
   const [inputValue, setInputValue] = React.useState("");
   const [checkboxState, setCheckboxState] = React.useState(false);
   const [arrayShortFilmsSaved, setArrayShortFilmsSaved] = React.useState({});
-  let cardsArray = Array.from(props.savedArrFilms);
+  const cardsArray = Array.from(props.savedArrFilms);
 
   const removeFilm = (data) => {
     props.removeCard(data);
@@ -21,7 +21,7 @@ const SavedMovies = (props) => {
 
   const shortFilmsStatus = () => {
     setCheckboxState(!checkboxState);
-    let intersection = cardsArray.filter((item) => item.duration <= 40);
+    const intersection = cardsArray.filter((item) => item.duration <= 40);
     setArrayShortFilmsSaved(intersection);
   };
 

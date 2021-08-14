@@ -12,14 +12,14 @@ const MoviesCard = (props) => {
   };
 
   useEffect(() => {
-    let isLiked = props.savedUserFilmsArr.some(
+    const isLiked = props.savedUserFilmsArr.some(
       (item) => item.movieId == props.card.id
     );
     setIsLiked(isLiked);
   }, []);
   console.log(props.card.trailerLink, 'ссылка')
   return (
-    <a href={props.card.trailerLink} target="_blank" className="moviesCard">
+    <section href={props.card.trailerLink} target="_blank" className="moviesCard">
       <div className="moviesCard__content">
         <h2 className="moviesCard__title">{props.card.nameRU}</h2>
         <p className="moviesCard__time">{`${hours}ч ${minutes}м`}</p>
@@ -30,12 +30,12 @@ const MoviesCard = (props) => {
           onClick={handleSaveCard}
         />
       </div>
-      <img
+      <a href={props.card.trailerLink} target="_blank"><img
         className="moviesCard__img"
         alt="picture"
         src={`https://api.nomoreparties.co/.${props.card.image.url}`}
-      />
-    </a>
+      /></a>
+    </section>
   );
 };
 
