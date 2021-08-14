@@ -2,6 +2,9 @@
     display: flex;
     justify-content: space-between;
     background-color: #F4F4F4;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
 }
 
 .moviesCard__title {

@@ -5,12 +5,6 @@ const MoviesCard = (props) => {
   const [isLiked, setIsLiked] = React.useState(false);
   const hours = Math.trunc(props.card.duration / 60);
   const minutes = props.card.duration % 60;
-  console.log(props.savedUserFilmsArr, "сохраненные фильмы");
-  console.log(props.card, "карточка");
-  console.log(
-    props.savedUserFilmsArr.some((item) => item.movieId == props.card.id),
-    "finish"
-  );
 
   const handleSaveCard = () => {
     props.savedFilm(props.card);
@@ -23,9 +17,9 @@ const MoviesCard = (props) => {
     );
     setIsLiked(isLiked);
   }, []);
-
+  console.log(props.card.trailerLink, 'ссылка')
   return (
-    <section className="moviesCard">
+    <a href={props.card.trailerLink} target="_blank" className="moviesCard">
       <div className="moviesCard__content">
         <h2 className="moviesCard__title">{props.card.nameRU}</h2>
         <p className="moviesCard__time">{`${hours}ч ${minutes}м`}</p>
@@ -41,7 +35,7 @@ const MoviesCard = (props) => {
         alt="picture"
         src={`https://api.nomoreparties.co/.${props.card.image.url}`}
       />
-    </section>
+    </a>
   );
 };
 

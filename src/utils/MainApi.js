@@ -77,6 +77,7 @@ class MainApi {
   }
 
   saveFilm({ data, jwt }) {
+    console.log( data.image.url, '000')
     return fetch(`${this._baseUrl}/movies`, {
       credentials: "include",
       method: "POST",
@@ -90,7 +91,7 @@ class MainApi {
         duration: data.duration,
         year: data.year,
         description: data.description,
-        image: `https://api.nomoreparties.co/` + data.image.url,
+        image: `https://api.nomoreparties.co` + data.image.url,
         trailer: data.trailerLink,
         thumbnail: data.trailerLink,
         nameRU: data.nameRU,
