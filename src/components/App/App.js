@@ -41,7 +41,6 @@ function App() {
         .checkToken(jwt)
         .then((res) => {
           setLoggedIn(true);
-          history.push("/movies");
         })
         .catch((err) => {
           console.log(err);
@@ -64,8 +63,10 @@ function App() {
         .catch((err) => {
           console.log(err);
         });
-        let serchFilm = JSON.parse(localStorage.getItem("resultFilms"))
-        setUserFilmsArr(serchFilm)
+      // let savedArr = JSON.parse(localStorage.getItem("savedFilms"))
+      // setSavedUserFilmsArr(savedArr)
+      let serchFilm = JSON.parse(localStorage.getItem("resultFilms"));
+      setUserFilmsArr(serchFilm);
     }
   }, [loggedIn]);
 
@@ -167,6 +168,7 @@ function App() {
       .saveFilm({ data, jwt })
       .then((res) => {
         setSavedUserFilmsArr([res.data, ...savedUserFilmsArr]);
+        // localStorage.setItem("savedFilms", JSON.stringify([res.data, ...savedUserFilmsArr]));
       })
       .catch((err) => {
         console.log(err);
@@ -264,8 +266,8 @@ function App() {
             logout={logout}
             updateUserInfo={updateUserInfo}
           />
-          <Route exact path="/">
-            {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />}
+          <Route path="*">
+            <Error />
           </Route>
         </Switch>
       </div>

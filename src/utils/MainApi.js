@@ -77,7 +77,6 @@ class MainApi {
   }
 
   saveFilm({ data, jwt }) {
-    console.log( data.image.url, '000')
     return fetch(`${this._baseUrl}/movies`, {
       credentials: "include",
       method: "POST",
