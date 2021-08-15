@@ -17,7 +17,7 @@ const MoviesCard = (props) => {
     );
     setIsLiked(isLiked);
   }, []);
-  console.log(props.card.trailerLink, 'ссылка')
+
   return (
     <section href={props.card.trailerLink} target="_blank" className="moviesCard">
       <div className="moviesCard__content">

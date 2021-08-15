@@ -12,7 +12,6 @@ const MoviesCardList = (props) => {
   const [visibleItem, setVisibleItem] = React.useState(7);
   const cardsConteiner = document.querySelector(".moviesCardList__button");
 
-
   const showMorItems = () => {
     setVisibleItem(visibleItem + 1);
     cardsConteiner.scrollIntoView({ block: "start", behavior: "smooth" });

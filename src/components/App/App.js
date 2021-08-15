@@ -32,9 +32,6 @@ function App() {
   const [width, setWidth] = React.useState(
     document.documentElement.clientWidth
   );
-  const [height, setHeight] = React.useState(
-    document.documentElement.clientHeight
-  );
 
   const history = useHistory();
   const tokenCheck = () => {
@@ -56,26 +53,25 @@ function App() {
 
   useEffect(() => {
     tokenCheck();
-    dataSaveFilms();
-    const jwt = localStorage.getItem("token");
-    mainApi
-      .getUserInfo(jwt)
-      .then((userInfo) => {
-        setCurrentUser(userInfo);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    const handleResize = () => {
-      setWidth(document.documentElement.clientWidth);
-      setHeight(document.documentElement.clientHeight);
-    };
-    window.addEventListener("resize", handleResize);
-  }, []);
+    if (loggedIn) {
+      dataSaveFilms();
+      const jwt = localStorage.getItem("token");
+      mainApi
+        .getUserInfo(jwt)
+        .then((userInfo) => {
+          setCurrentUser(userInfo);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+        let serchFilm = JSON.parse(localStorage.getItem("resultFilms"))
+        setUserFilmsArr(serchFilm)
+    }
+  }, [loggedIn]);
 
   //Регистрация пользователя
   const registerUser = ({ name, email, password }) => {
-    setIsLoading(true)
+    setIsLoading(true);
     return mainApi
       .register({ name, email, password })
       .then((res) => {
@@ -85,26 +81,26 @@ function App() {
         history.push("/movies");
       })
       .catch((err) => {
-        setIsLoading(false)
+        setIsLoading(false);
         console.log(err);
       });
   };
 
   //Логин пользователя
   const login = ({ email, password }) => {
-    setIsLoading(true)
+    setIsLoading(true);
     return mainApi
       .authorize({ email, password })
       .then((res) => {
         localStorage.setItem("token", res.token);
         setLoggedIn(true);
         tokenCheck();
-        setIsLoading(false)
+        setIsLoading(false);
         history.push("/movies");
       })
       .catch((err) => {
         console.log(err);
-        setIsLoading(false)
+        setIsLoading(false);
         setError(true);
       });
   };
@@ -114,8 +110,10 @@ function App() {
     setIsLoading(true);
     if (localStorage.getItem("movies")) {
       const films = JSON.parse(localStorage.getItem("movies"));
-      const serchResultArray = films.filter((item) => item.nameRU.includes(data));
-      localStorage.setItem("resultFilms", serchResultArray);
+      const serchResultArray = films.filter((item) =>
+        item.nameRU.includes(data)
+      );
+      localStorage.setItem("resultFilms", JSON.stringify(serchResultArray));
       setUserFilmsArr(serchResultArray);
       dataSaveFilms();
       setIsLoading(false);
@@ -145,11 +143,14 @@ function App() {
   //Api запрос сохраненных фильмов
   const dataSaveFilms = () => {
     const jwt = localStorage.getItem("token");
-    mainApi.getFilms(jwt).then((res) => {
-      setSavedUserFilmsArr(res);
-    }).catch((err) => {
-      console.log(err);
-    });
+    mainApi
+      .getFilms(jwt)
+      .then((res) => {
+        setSavedUserFilmsArr(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   //Фильтрация короткометражек
@@ -195,18 +196,18 @@ function App() {
 
   //Редактирование инфы пользователя
   const updateUserInfo = (data) => {
-    setSuccess(false)
-    setIsLoading(true)
+    setSuccess(false);
+    setIsLoading(true);
     const jwt = localStorage.getItem("token");
     mainApi
       .updateUserInfo({ data, jwt })
       .then((res) => {
         setCurrentUser({ email: res.data.email, name: res.data.name });
-        setIsLoading(false)
-        setSuccess(true)
+        setIsLoading(false);
+        setSuccess(true);
       })
       .catch((err) => {
-        setIsLoading(false)
+        setIsLoading(false);
         console.log(err);
       });
   };
@@ -230,7 +231,7 @@ function App() {
             <Portfolio />
             <Footer />
           </Route>
-          
+
           <ProtectedRoute
             path="/movies"
             loggedIn={loggedIn}
