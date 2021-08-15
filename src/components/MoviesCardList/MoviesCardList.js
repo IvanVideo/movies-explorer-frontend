@@ -69,6 +69,9 @@ const MoviesCardList = (props) => {
                   savedMoviesArr={props.savedMoviesArr}
                   savedUserFilmsArr={props.savedUserFilmsArr}
                   isLiked={props.isLiked}
+                  removeCard={props.removeCard}
+                  dataFilms={props.dataFilms}
+                  removeLike={props.removeLike}
                 />
               ))
           ) : (

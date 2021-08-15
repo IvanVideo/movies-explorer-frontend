@@ -112,7 +112,6 @@ class MainApi {
   }
 
   deleteCard({ id, jwt }) {
-    console.log(id);
     return fetch(`${this._baseUrl}/movies/${id}`, {
       credentials: "include",
       method: "DELETE",

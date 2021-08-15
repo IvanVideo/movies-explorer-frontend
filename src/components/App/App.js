@@ -41,6 +41,7 @@ function App() {
         .checkToken(jwt)
         .then((res) => {
           setLoggedIn(true);
+          history.push("/movies")
         })
         .catch((err) => {
           console.log(err);
@@ -189,6 +190,11 @@ function App() {
       });
   };
 
+  const removeLike = (data, card) => {
+    let filmLiked = savedUserFilmsArr.filter(item => item.movieId == card.id)
+    removeCard(filmLiked[0]._id)
+  }
+
   //Резлогирование пользователя
   const logout = () => {
     localStorage.removeItem("token");
@@ -242,10 +248,12 @@ function App() {
             widthWindow={width}
             savedUserFilmsArr={savedUserFilmsArr}
             errorFilms={errorFilms}
+            removeLike={removeLike}
             component={MoviesCardList}
             enterValue={enterValue}
             enterValueSaved={enterValueSaved}
             savedFilm={savedFilm}
+            removeCard={removeCard}
           />
           <ProtectedRoute
             path="/saved-movies"
