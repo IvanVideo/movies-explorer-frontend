@@ -64,10 +64,10 @@ function App() {
         .catch((err) => {
           console.log(err);
         });
-      // let savedArr = JSON.parse(localStorage.getItem("savedFilms"))
-      // setSavedUserFilmsArr(savedArr)
-      let serchFilm = JSON.parse(localStorage.getItem("resultFilms"));
-      setUserFilmsArr(serchFilm);
+      if(localStorage.getItem("resultFilms")){
+        let serchFilm = JSON.parse(localStorage.getItem("resultFilms"));
+        setUserFilmsArr(serchFilm);
+      }
     }
   }, [loggedIn]);
 
