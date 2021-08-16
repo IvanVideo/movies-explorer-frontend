@@ -15,6 +15,8 @@ const SavedMovies = (props) => {
   const [arrayShortFilmsSaved, setArrayShortFilmsSaved] = React.useState({});
 
   const cardsArray = Array.from(props.savedArrFilms);
+  const userArrSavedFilms = cardsArray.filter(item => item.owner === props.currentUser._id)
+  console.log(userArrSavedFilms, 'чисто мои фильмы')
 
   const removeFilm = (data) => {
     props.removeCard(data);
@@ -82,7 +84,7 @@ const SavedMovies = (props) => {
                   removeFilm={removeFilm}
                 />
               ))
-            : cardsArray.map((item) => (
+            : userArrSavedFilms.map((item) => (
                 <MoviesSavedCard
                   key={item._id}
                   card={item}

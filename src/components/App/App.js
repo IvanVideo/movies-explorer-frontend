@@ -51,7 +51,7 @@ function App() {
       return;
     }
   };
-  // console.log(currentUser)
+
   useEffect(() => {
     tokenCheck();
     if (loggedIn) {
@@ -68,7 +68,7 @@ function App() {
           });
       }
       if (localStorage.getItem("resultFilms")) {
-        let serchFilm = JSON.parse(localStorage.getItem("resultFilms"));
+        const serchFilm = JSON.parse(localStorage.getItem("resultFilms"));
         setUserFilmsArr(serchFilm);
       }
     }
@@ -172,7 +172,6 @@ function App() {
       .saveFilm({ data, jwt })
       .then((res) => {
         setSavedUserFilmsArr([res.data, ...savedUserFilmsArr]);
-        // localStorage.setItem("savedFilms", JSON.stringify([res.data, ...savedUserFilmsArr]));
       })
       .catch((err) => {
         console.log(err);
@@ -182,7 +181,6 @@ function App() {
   //Удаление фильмов
   const removeCard = (id) => {
     const jwt = localStorage.getItem("token");
-    console.log(jwt, 'удалил')
     mainApi
       .deleteCard({ id, jwt })
       .then(() => {
@@ -195,7 +193,7 @@ function App() {
   };
 
   const removeLike = (data, card) => {
-    let filmLiked = savedUserFilmsArr.filter((item) => item.movieId == card.id);
+    const filmLiked = savedUserFilmsArr.filter((item) => item.movieId == card.id);
     removeCard(filmLiked[0]._id);
   };
 
@@ -269,6 +267,7 @@ function App() {
               path="/saved-movies"
               loggedIn={loggedIn}
               savedArrFilms={savedUserFilmsArr}
+              currentUser={currentUser}
               shortFilms={shortFilms}
               component={SavedMovies}
               removeCard={removeCard}

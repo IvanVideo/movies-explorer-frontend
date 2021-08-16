@@ -3,7 +3,7 @@ import { Link, BrowserRouter, useHistory } from "react-router-dom";
 import React from "react";
 
 const Error = () => {
-  let history = useHistory();
+  const history = useHistory();
   return (
     <div className="notFound">
       <h1 className="notFound__title">404</h1>

@@ -16,19 +16,14 @@ const MoviesCardList = (props) => {
   const showMorItems = () => {
     setVisibleItem(visibleItem + 1);
     cardsConteiner.scrollIntoView({ block: "start", behavior: "smooth" });
-    // console.log(visibleItem)
-    // console.log(props.dataFilms)
-
   };
 
   useEffect(() => {
-    console.log(props.dataFilms.length)
     if (props.dataFilms.length === 0) {
       setButtonVidible(false);
     }
     if (visibleItem === props.dataFilms.length) {
       setButtonVidible(false);
-      console.log("!!!!");
     }
   });
 
@@ -112,16 +107,6 @@ const MoviesCardList = (props) => {
         >
           Ещё
         </button>
-        {/* <button
-          className={
-            props.dataFilms.length === 0
-              ? "moviesCardList__button emptySearch__notVisible"
-              : "moviesCardList__button"
-          }
-          onClick={showMorItems}
-        >
-          Ещё
-        </button> */}
       </div>
       <Footer />
     </section>
