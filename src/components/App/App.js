@@ -41,7 +41,7 @@ function App() {
         .checkToken(jwt)
         .then((res) => {
           setLoggedIn(true);
-          history.push("/movies")
+          history.push("/movies");
         })
         .catch((err) => {
           console.log(err);
@@ -56,15 +56,17 @@ function App() {
     if (loggedIn) {
       dataSaveFilms();
       const jwt = localStorage.getItem("token");
-      mainApi
-        .getUserInfo(jwt)
-        .then((userInfo) => {
-          setCurrentUser(userInfo);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      if(localStorage.getItem("resultFilms")){
+      if (currentUser.length === 0) {
+        mainApi
+          .getUserInfo(jwt)
+          .then((userInfo) => {
+            setCurrentUser(userInfo);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+      if (localStorage.getItem("resultFilms")) {
         let serchFilm = JSON.parse(localStorage.getItem("resultFilms"));
         setUserFilmsArr(serchFilm);
       }
@@ -191,9 +193,9 @@ function App() {
   };
 
   const removeLike = (data, card) => {
-    let filmLiked = savedUserFilmsArr.filter(item => item.movieId == card.id)
-    removeCard(filmLiked[0]._id)
-  }
+    let filmLiked = savedUserFilmsArr.filter((item) => item.movieId == card.id);
+    removeCard(filmLiked[0]._id);
+  };
 
   //Резлогирование пользователя
   const logout = () => {
@@ -240,40 +242,55 @@ function App() {
             <Footer />
           </Route>
 
-          <ProtectedRoute
-            path="/movies"
-            loggedIn={loggedIn}
-            dataFilms={userFilmsArr}
-            isLoading={isLoading}
-            widthWindow={width}
-            savedUserFilmsArr={savedUserFilmsArr}
-            errorFilms={errorFilms}
-            removeLike={removeLike}
-            component={MoviesCardList}
-            enterValue={enterValue}
-            enterValueSaved={enterValueSaved}
-            savedFilm={savedFilm}
-            removeCard={removeCard}
-          />
-          <ProtectedRoute
-            path="/saved-movies"
-            loggedIn={loggedIn}
-            savedArrFilms={savedUserFilmsArr}
-            shortFilms={shortFilms}
-            component={SavedMovies}
-            removeCard={removeCard}
-            enterValueSaved={enterValueSaved}
-          />
-          <ProtectedRoute
-            path="/profile"
-            loggedIn={loggedIn}
-            isLoading={isLoading}
-            success={success}
-            userInfo={currentUser}
-            component={Profile}
-            logout={logout}
-            updateUserInfo={updateUserInfo}
-          />
+          {loggedIn ? (
+            <ProtectedRoute
+              path="/movies"
+              loggedIn={loggedIn}
+              dataFilms={userFilmsArr}
+              isLoading={isLoading}
+              widthWindow={width}
+              savedUserFilmsArr={savedUserFilmsArr}
+              errorFilms={errorFilms}
+              removeLike={removeLike}
+              component={MoviesCardList}
+              enterValue={enterValue}
+              enterValueSaved={enterValueSaved}
+              savedFilm={savedFilm}
+              removeCard={removeCard}
+            />
+          ) : (
+            <Redirect to="/" />
+          )}
+
+          {loggedIn ? (
+            <ProtectedRoute
+              path="/saved-movies"
+              loggedIn={loggedIn}
+              savedArrFilms={savedUserFilmsArr}
+              shortFilms={shortFilms}
+              component={SavedMovies}
+              removeCard={removeCard}
+              enterValueSaved={enterValueSaved}
+            />
+          ) : (
+            <Redirect to="/" />
+          )}
+
+          {loggedIn ? (
+            <ProtectedRoute
+              path="/profile"
+              loggedIn={loggedIn}
+              isLoading={isLoading}
+              success={success}
+              userInfo={currentUser}
+              component={Profile}
+              logout={logout}
+              updateUserInfo={updateUserInfo}
+            />
+          ) : (
+            <Redirect to="/" />
+          )}
+
           <Route path="*">
             <Error />
           </Route>
