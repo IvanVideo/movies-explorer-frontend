@@ -40,6 +40,7 @@ function App() {
       mainApi
         .checkToken(jwt)
         .then((res) => {
+          setCurrentUser(res)
           setLoggedIn(true);
           history.push("/movies");
         })
@@ -50,7 +51,7 @@ function App() {
       return;
     }
   };
-
+  // console.log(currentUser)
   useEffect(() => {
     tokenCheck();
     if (loggedIn) {
@@ -79,10 +80,9 @@ function App() {
     return mainApi
       .register({ name, email, password })
       .then((res) => {
-        setCurrentUser({ email: res.data.email, name: res.data.name });
+        console.log(res, '000')
         setIsLoading(false);
-        setLoggedIn(true);
-        history.push("/movies");
+        login({ name, email, password })
       })
       .catch((err) => {
         setIsLoading(false);
@@ -91,10 +91,11 @@ function App() {
   };
 
   //Логин пользователя
-  const login = ({ email, password }) => {
+  const login = (data) => {
+    console.log(data, 'логин')
     setIsLoading(true);
     return mainApi
-      .authorize({ email, password })
+      .authorize({ email: data.email, password: data.password })
       .then((res) => {
         localStorage.setItem("token", res.token);
         setLoggedIn(true);
@@ -181,6 +182,7 @@ function App() {
   //Удаление фильмов
   const removeCard = (id) => {
     const jwt = localStorage.getItem("token");
+    console.log(jwt, 'удалил')
     mainApi
       .deleteCard({ id, jwt })
       .then(() => {

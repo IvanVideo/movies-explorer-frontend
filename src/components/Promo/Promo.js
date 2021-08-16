@@ -13,6 +13,7 @@ const Promo = (props) => {
                     {props.loggedIn ? (<div className='promo__start'>
                         <Link className='header__link films' to='/movies'>Фильмы</Link>
                         <Link className='header__link saved' to='/saved-movies'>Сохранённые фильмы</Link>
+                        <Link className='header__link saved' to='/profile'>Аккаунт</Link>
                     </div>) : (<div className='promo__start'>
                         <Link className='promo__singup' to='/signup'>Регистрация</Link>
                         <Link className='promo__link' to='/signin'>

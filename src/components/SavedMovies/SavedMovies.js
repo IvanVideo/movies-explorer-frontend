@@ -13,6 +13,7 @@ const SavedMovies = (props) => {
   const [inputValue, setInputValue] = React.useState("");
   const [checkboxState, setCheckboxState] = React.useState(false);
   const [arrayShortFilmsSaved, setArrayShortFilmsSaved] = React.useState({});
+
   const cardsArray = Array.from(props.savedArrFilms);
 
   const removeFilm = (data) => {

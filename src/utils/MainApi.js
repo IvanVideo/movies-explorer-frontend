@@ -36,14 +36,14 @@ class MainApi {
     }).then((res) => this._checkResponse(res));
   }
 
-  authorize({ email, password }) {
+  authorize(data) {
     return fetch(`${this._baseUrl}/signin`, {
       credentials: "include",
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
-        password: password,
-        email: email,
+        password: data.password,
+        email: data.email,
       }),
     }).then((res) => this._checkResponse(res));
   }
