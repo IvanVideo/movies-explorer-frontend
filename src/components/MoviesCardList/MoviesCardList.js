@@ -9,13 +9,28 @@ import Preloader from "../Preloader/Preloader";
 const MoviesCardList = (props) => {
   const [arrayShortFilms, setArrayShortFilms] = React.useState({});
   const [renderStatus, setRenderStatus] = React.useState(true);
+  const [buttonVisible, setButtonVidible] = React.useState(true);
   const [visibleItem, setVisibleItem] = React.useState(7);
   const cardsConteiner = document.querySelector(".moviesCardList__button");
 
   const showMorItems = () => {
     setVisibleItem(visibleItem + 1);
     cardsConteiner.scrollIntoView({ block: "start", behavior: "smooth" });
+    // console.log(visibleItem)
+    // console.log(props.dataFilms)
+
   };
+
+  useEffect(() => {
+    console.log(props.dataFilms.length)
+    if (props.dataFilms.length === 0) {
+      setButtonVidible(false);
+    }
+    if (visibleItem === props.dataFilms.length) {
+      setButtonVidible(false);
+      console.log("!!!!");
+    }
+  });
 
   const shortFilmsStatus = (data) => {
     const shortFilms = props.dataFilms.filter((item) => item.duration <= 40);
@@ -89,6 +104,16 @@ const MoviesCardList = (props) => {
         </div>
         <button
           className={
+            buttonVisible
+              ? "moviesCardList__button"
+              : "moviesCardList__button emptySearch__notVisible"
+          }
+          onClick={showMorItems}
+        >
+          Ещё
+        </button>
+        {/* <button
+          className={
             props.dataFilms.length === 0
               ? "moviesCardList__button emptySearch__notVisible"
               : "moviesCardList__button"
@@ -96,7 +121,7 @@ const MoviesCardList = (props) => {
           onClick={showMorItems}
         >
           Ещё
-        </button>
+        </button> */}
       </div>
       <Footer />
     </section>
