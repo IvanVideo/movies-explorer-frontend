@@ -1,6 +1,5 @@
 import './MoviesSavedCard.css';
 import React, { useEffect } from "react";
-import Like from '../Like/Like';
 
 const MoviesSavedCard = (props) => {
     const [card, setCard] = React.useState(props.card)

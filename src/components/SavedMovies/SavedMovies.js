@@ -16,7 +16,6 @@ const SavedMovies = (props) => {
 
   const cardsArray = Array.from(props.savedArrFilms);
   const userArrSavedFilms = cardsArray.filter(item => item.owner === props.currentUser._id)
-  console.log(userArrSavedFilms, 'чисто мои фильмы')
 
   const removeFilm = (data) => {
     props.removeCard(data);

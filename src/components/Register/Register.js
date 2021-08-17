@@ -1,6 +1,6 @@
 import "./Register.css";
 import logo from "../../images/logo.svg";
-import { Link, BrowserRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Preloader from "../Preloader/Preloader";
 import React, { useEffect, useCallback } from "react";
 
