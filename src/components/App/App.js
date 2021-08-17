@@ -34,23 +34,33 @@ function App() {
   );
 
   const history = useHistory();
-  const tokenCheck = () => {
+  const tokenCheck = React.useCallback(() => {
     const jwt = localStorage.getItem("token");
     if (jwt && jwt !== null) {
       mainApi
         .checkToken(jwt)
         .then((res) => {
-          setCurrentUser(res)
-          setLoggedIn(true);
-          history.push("/movies");
-        })
+          if (res) {
+            setCurrentUser(res)
+            setLoggedIn(true);
+            if (location.pathname === '/signin') {
+              history.push('/movies');
+            } else if (location.pathname === '/movies') {
+              history.push('/movies');
+            } else if (location.pathname === '/saved-movies') {
+              history.push('/saved-movies');
+            } else if (location.pathname === '/profile') {
+              history.push('/profile');
+            }
+          }
+        }, [history])
         .catch((err) => {
-          console.log(err);
+          history.push('/signin');
         });
     } else {
       return;
     }
-  };
+  }, [history]);
 
   useEffect(() => {
     tokenCheck();
@@ -80,7 +90,6 @@ function App() {
     return mainApi
       .register({ name, email, password })
       .then((res) => {
-        console.log(res, '000')
         setIsLoading(false);
         login({ name, email, password })
       })
@@ -92,7 +101,6 @@ function App() {
 
   //Логин пользователя
   const login = (data) => {
-    console.log(data, 'логин')
     setIsLoading(true);
     return mainApi
       .authorize({ email: data.email, password: data.password })
@@ -242,59 +250,45 @@ function App() {
             <Footer />
           </Route>
 
-          {loggedIn ? (
-            <ProtectedRoute
-              path="/movies"
-              loggedIn={loggedIn}
-              dataFilms={userFilmsArr}
-              isLoading={isLoading}
-              widthWindow={width}
-              savedUserFilmsArr={savedUserFilmsArr}
-              errorFilms={errorFilms}
-              removeLike={removeLike}
-              component={MoviesCardList}
-              enterValue={enterValue}
-              enterValueSaved={enterValueSaved}
-              savedFilm={savedFilm}
-              removeCard={removeCard}
-            />
-          ) : (
-            <Redirect to="/" />
-          )}
+          <ProtectedRoute
+            path="/movies"
+            loggedIn={loggedIn}
+            dataFilms={userFilmsArr}
+            isLoading={isLoading}
+            widthWindow={width}
+            savedUserFilmsArr={savedUserFilmsArr}
+            errorFilms={errorFilms}
+            removeLike={removeLike}
+            component={MoviesCardList}
+            enterValue={enterValue}
+            enterValueSaved={enterValueSaved}
+            savedFilm={savedFilm}
+            removeCard={removeCard}
+          />
 
-          {loggedIn ? (
-            <ProtectedRoute
-              path="/saved-movies"
-              loggedIn={loggedIn}
-              savedArrFilms={savedUserFilmsArr}
-              currentUser={currentUser}
-              shortFilms={shortFilms}
-              component={SavedMovies}
-              removeCard={removeCard}
-              enterValueSaved={enterValueSaved}
-            />
-          ) : (
-            <Redirect to="/" />
-          )}
+          <ProtectedRoute
+            path="/saved-movies"
+            loggedIn={loggedIn}
+            savedArrFilms={savedUserFilmsArr}
+            currentUser={currentUser}
+            shortFilms={shortFilms}
+            component={SavedMovies}
+            removeCard={removeCard}
+            enterValueSaved={enterValueSaved}
+          />
 
-          {loggedIn ? (
-            <ProtectedRoute
-              path="/profile"
-              loggedIn={loggedIn}
-              isLoading={isLoading}
-              success={success}
-              userInfo={currentUser}
-              component={Profile}
-              logout={logout}
-              updateUserInfo={updateUserInfo}
-            />
-          ) : (
-            <Redirect to="/" />
-          )}
-
-          <Route path="*">
-            <Error />
-          </Route>
+          <ProtectedRoute
+            path="/profile"
+            loggedIn={loggedIn}
+            isLoading={isLoading}
+            success={success}
+            userInfo={currentUser}
+            component={Profile}
+            logout={logout}
+            updateUserInfo={updateUserInfo}
+          />
+          <Route path="*"
+          component={Error} />
         </Switch>
       </div>
     </CurrentUserContext.Provider>
