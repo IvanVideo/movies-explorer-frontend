@@ -51,8 +51,13 @@ const ProfileForm = (props) => {
   }, [resetForm]);
 
   const handleSubmitForm = (e) => {
-    e.preventDefault();
-    props.userValues({ ...values });
+    if (!isValid) {
+      e.preventDefault();
+      return;
+    } else {
+      e.preventDefault();
+      props.userValues({ ...values });
+    }
   };
 
   return (
