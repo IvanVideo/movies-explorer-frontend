@@ -22,6 +22,7 @@ import { Route, Switch, useHistory, Redirect } from "react-router-dom";
 
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
+  const [isLiked, setIsLiked] = React.useState(false);
   const [error, setError] = React.useState(false);
   const [errorFilms, setErrorFilms] = React.useState(false);
   const [success, setSuccess] = React.useState(false);
@@ -264,6 +265,7 @@ function App() {
             widthWindow={width}
             savedUserFilmsArr={savedUserFilmsArr}
             errorFilms={errorFilms}
+            isLiked={isLiked}
             removeLike={removeLike}
             component={MoviesCardList}
             enterValue={enterValue}

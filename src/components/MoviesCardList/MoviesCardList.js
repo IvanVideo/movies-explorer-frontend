@@ -11,22 +11,27 @@ const MoviesCardList = (props) => {
   const [renderStatus, setRenderStatus] = React.useState(true);
   const [buttonVisible, setButtonVidible] = React.useState(true);
   const [visibleItem, setVisibleItem] = React.useState(7);
-  const cardsConteiner = document.querySelector(".moviesCardList__button");
+  const [conteiner, setConteiner] = React.useState('');
 
   const showMorItems = () => {
     setVisibleItem(visibleItem + 1);
-    cardsConteiner.scrollIntoView({ block: "start", behavior: "smooth" });
+    conteiner.scrollIntoView({ block: "start", behavior: "smooth" });
   };
 
   useEffect(() => {
     localStorage.setItem("url", location.pathname);
+  const cardsConteiner = document.querySelector(".moviesCardList__button");
+  setConteiner(cardsConteiner)
     if (props.dataFilms.length === 0) {
       setButtonVidible(false);
     }
     if (visibleItem === props.dataFilms.length) {
       setButtonVidible(false);
     }
-  }, []);
+    if (props.dataFilms.length < 7){
+      setButtonVidible(false);
+    }
+  }, [visibleItem, props.dataFilms]);
 
   const shortFilmsStatus = (data) => {
     const shortFilms = props.dataFilms.filter((item) => item.duration <= 40);
