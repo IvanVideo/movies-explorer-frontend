@@ -34,33 +34,37 @@ function App() {
   );
 
   const history = useHistory();
+
   const tokenCheck = React.useCallback(() => {
     const jwt = localStorage.getItem("token");
     if (jwt && jwt !== null) {
       mainApi
         .checkToken(jwt)
-        .then((res) => {
-          if (res) {
-            setCurrentUser(res)
-            setLoggedIn(true);
-            if (location.pathname === '/signin') {
-              history.push('/movies');
-            } else if (location.pathname === '/movies') {
-              history.push('/movies');
-            } else if (location.pathname === '/saved-movies') {
-              history.push('/saved-movies');
-            } else if (location.pathname === '/profile') {
-              history.push('/profile');
+        .then(
+          (res) => {
+            if (res) {
+              setCurrentUser(res);
+              setLoggedIn(true);
+              if (location.pathname === "/signin") {
+                history.push("/movies");
+              } else if (location.pathname === "/movies") {
+                history.push("/movies");
+              } else if (location.pathname === "/saved-movies") {
+                history.push("/saved-movies");
+              } else if (location.pathname === "/profile") {
+                history.push("/profile");
+              }
             }
-          }
-        }, [history])
+          },
+          [history]
+        )
         .catch((err) => {
-          history.push('/signin');
+          history.push("/signin");
         });
     } else {
       return;
     }
-  }, [history]);
+  }, []);
 
   useEffect(() => {
     tokenCheck();
@@ -91,7 +95,7 @@ function App() {
       .register({ name, email, password })
       .then((res) => {
         setIsLoading(false);
-        login({ name, email, password })
+        login({ name, email, password });
       })
       .catch((err) => {
         setIsLoading(false);
@@ -201,7 +205,9 @@ function App() {
   };
 
   const removeLike = (data, card) => {
-    const filmLiked = savedUserFilmsArr.filter((item) => item.movieId == card.id);
+    const filmLiked = savedUserFilmsArr.filter(
+      (item) => item.movieId == card.id
+    );
     removeCard(filmLiked[0]._id);
   };
 
@@ -287,8 +293,7 @@ function App() {
             logout={logout}
             updateUserInfo={updateUserInfo}
           />
-          <Route path="*"
-          component={Error} />
+          <Route path="*" component={Error} />
         </Switch>
       </div>
     </CurrentUserContext.Provider>

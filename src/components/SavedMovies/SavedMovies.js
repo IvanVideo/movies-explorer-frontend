@@ -17,6 +17,8 @@ const SavedMovies = (props) => {
   const cardsArray = Array.from(props.savedArrFilms);
   const userArrSavedFilms = cardsArray.filter(item => item.owner === props.currentUser._id)
 
+  localStorage.setItem("url", location.pathname);
+
   const removeFilm = (data) => {
     props.removeCard(data);
   };

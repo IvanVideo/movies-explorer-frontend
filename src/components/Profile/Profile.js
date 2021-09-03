@@ -9,16 +9,14 @@ const Profile = (props) => {
     const currentUser = React.useContext(CurrentUserContext);
     const [name, setname] = React.useState('');
 
+    localStorage.setItem("url", location.pathname);
+
     useEffect(() => {
         setname(currentUser.name)
     })
 
     const changeStatus = () => {
         setIsActive(!isActive)
-    }
-
-    const check = (data) => {
-
     }
 
     return (

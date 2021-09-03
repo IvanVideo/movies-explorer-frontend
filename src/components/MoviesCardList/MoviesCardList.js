@@ -19,13 +19,14 @@ const MoviesCardList = (props) => {
   };
 
   useEffect(() => {
+    localStorage.setItem("url", location.pathname);
     if (props.dataFilms.length === 0) {
       setButtonVidible(false);
     }
     if (visibleItem === props.dataFilms.length) {
       setButtonVidible(false);
     }
-  });
+  }, []);
 
   const shortFilmsStatus = (data) => {
     const shortFilms = props.dataFilms.filter((item) => item.duration <= 40);
