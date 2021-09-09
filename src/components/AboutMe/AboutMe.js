@@ -8,14 +8,14 @@ const AboutMe = () => {
             <div className='conteiner'>
                 <p className='title'>Студент</p>
                 <hr className='line' />
-                <section className='aboutMe-content'>
-                    <div className='aboutMe-text'>
-                        <h2 className='aboutMe-name'>Иван</h2>
-                        <p className='aboutMe-job'>Фронтенд-разработчик, 29 лет</p>
-                        <p className='aboutMe-text'>Я родился и живу в Москве. Я люблю слушать музыку, а ещё увлекаюсь бегом. Недавно начал кодить. Люблю путешествовать. Обожаю экстримальный вид отдыха. С 2015 года работал в театре Табакова. После того, как прошёл курс по веб-разработке, начал заниматься фриланс-заказами.</p>
-                        <div className='aboutMe-links'>
-                            <a className='aboutMe-link' href='https://www.facebook.com/iteapro/' target='_blank' rel='noreferrer'>Facebook</a>
-                            <a className='aboutMe-link' href='https://github.com/IvanVideo' target='_blank' rel='noreferrer'>Github</a>
+                <section className='aboutMe__content'>
+                    <div className='aboutMe__text'>
+                        <h2 className='aboutMe__name'>Иван</h2>
+                        <p className='aboutMe__job'>Фронтенд-разработчик, 29 лет</p>
+                        <p className='aboutMe__text'>Я родился и живу в Москве. Я люблю слушать музыку, а ещё увлекаюсь бегом. Недавно начал кодить. Люблю путешествовать. Обожаю экстримальный вид отдыха. С 2015 года работал в театре Табакова. После того, как прошёл курс по веб-разработке, начал заниматься фриланс-заказами.</p>
+                        <div className='aboutMe__links'>
+                            <a className='aboutMe__link' href='https://www.facebook.com/iteapro/' target='_blank' rel='noreferrer'>Facebook</a>
+                            <a className='aboutMe__link' href='https://github.com/IvanVideo' target='_blank' rel='noreferrer'>Github</a>
                         </div>
                     </div>
                     <img className='aboutMe-img' src={foto} />

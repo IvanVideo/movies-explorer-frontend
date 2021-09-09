@@ -8,7 +8,7 @@
     margin: 0 auto;
 }
 
-.conteiner-techs {
+.conteiner__techs {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -29,28 +29,28 @@
     height: 1px;
 }
 
-.techs-header {
+.techs__header {
     border-bottom: 1px solid black;
     max-width: 1140px;
     width: 100%;
     margin: 100px auto 0;
 }
 
-.techs-technology {
+.techs__technology {
     font-family: 'Inter', 'Arial', 'Helvetica';
     font-weight: 400;
     font-size: 22px;
     margin: 0 0 23px;
 }
 
-.techs-title {
+.techs__title {
     font-family: 'Inter', 'Arial', 'Helvetica';
     font-weight: 400;
     font-size: 50px;
     margin: 90px 0 0;
 }
 
-.techs-about {
+.techs__about {
     font-family: 'Inter', 'Arial', 'Helvetica';
     font-weight: 400;
     font-size: 14px;
@@ -59,12 +59,12 @@
     margin: 26px 0 0;
 }
 
-.techs-stack {
+.techs__stack {
     display: flex;
     margin: 100px 0;
 }
 
-.techs-item {
+.techs__item {
     width: 90px;
     height: 60px;
     font-family: 'Inter', 'Arial', 'Helvetica';
@@ -78,24 +78,24 @@
     margin-right: 10px;
 }
 
-.techs-item:last-child {
+.techs__item:last-child {
     margin-right: 0;
 }
 
 @media screen and (max-width: 1280px) {
-    .techs-header {
+    .techs__header {
         max-width: 688px;
     }
 }
 
 @media screen and (max-width: 1280px) {
-    .techs-about {
+    .techs__about {
         font-size: 12px;
     }
 }
 
 @media screen and (max-width: 1280px) {
-    .techs-item {
+    .techs__item {
         width: 84px;
         height: 57px;
         font-size: 12px;
@@ -103,27 +103,27 @@
 }
 
 @media screen and (max-width: 768px) {
-    .techs-technology {
+    .techs__technology {
         font-size: 18px;
         margin: 0 0 28px;
     }
 }
 
 @media screen and (max-width: 768px) {
-    .techs-header {
+    .techs__header {
         max-width: 284px;
     }
 }
 
 @media screen and (max-width: 768px) {
-    .techs-title {
+    .techs__title {
         font-size: 30px;
         margin: 60px 0 0;
     }
 }
 
 @media screen and (max-width: 768px) {
-    .techs-about {
+    .techs__about {
         font-size: 11px;
         max-width: 292px;
         margin: 24px 0 0;
@@ -131,7 +131,7 @@
 }
 
 @media screen and (max-width: 768px) {
-    .techs-stack {
+    .techs__stack {
         display: grid;
         grid-template-columns: 84px 84px;
         gap: 10px;
@@ -141,7 +141,7 @@
 }
 
 @media screen and (max-width: 768px) {
-    .techs-item {
+    .techs__item {
         font-size: 12px;
         background-color: #E8E8E8;
         margin-right: 0;

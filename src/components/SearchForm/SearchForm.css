@@ -2,24 +2,24 @@
     width: 100%;
 }
 
-.searchForm-radio:hover {
+.searchForm__radio:hover {
     cursor: pointer;
 }
 
-.searchForm-conteiner {
+.searchForm__conteiner {
     max-width: 1140px;
     width: 100%;
     margin: 0 auto;
     padding-top: 70px;
 }
 
-.searchForm-active {
+.searchForm__active {
     display: flex;
     align-items: center;
     margin-top: 26px;
 }
 
-.searchForm-shortfilms {
+.searchForm__shortfilms {
     margin: 0;
     margin-left: 14px;
     font-weight: 400;
@@ -28,19 +28,25 @@
     line-height: 18px;
 }
 
-.searchForm-checkbox {
+.searchForm__checkbox {
     display: none;
 }
 
-.searchForm-box{
-    display: flex;
-    width: 100%;
-    position: relative;
+.searchForm-radio {
+    cursor: pointer;
 }
 
-.searchForm-input {
+.searchForm__box{
     width: 100%;
-    height: 22px;
+    padding-bottom: 44px;
+    position: relative;
+    border-bottom: 1px solid #aaaaaa21;
+    z-index: 1;
+}
+
+.searchForm__input {
+    width: 100%;
+    height: 72px;
     border: 1.5px solid #AAAAAA;
     border-radius: 8px;
     opacity: 0.2;
@@ -48,11 +54,11 @@
     font-weight: 400;
     font-size: 18px;
     line-height: 20px;
-    color: #A0A0A0;
     padding: 25px;
+    box-sizing: border-box;
 }
 
-.searchForm-button {
+.searchForm__button {
     width: 100px;
     height: 52px;
     border: none;
@@ -69,25 +75,41 @@
     top: 10px;
 }
 
-.searchForm-button:hover {
+.error {
+    height: 20px;
+    margin: 0 auto;
+    margin-right: 40%;
+    font-family: 'Inter', 'Arial', 'Helvetica';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    color: red;
+}
+
+.error__unvisible {
+    display: none;
+}
+
+.searchForm__button:hover {
     cursor: pointer;
     opacity: 0.8;
 }
 
 @media screen and (max-width: 1280px) {
-    .searchForm-conteiner {
+    .searchForm__conteiner {
         max-width: 1140px;
     }
 }
 
 @media screen and (max-width: 768px) {
-    .searchForm-conteiner {
+    .searchForm__conteiner {
         max-width: 300px;
     }
 }
 
 @media screen and (max-width: 768px) {
-    .searchForm-input {
+    .searchForm__input {
         height: 56px;
         padding: 0 0 0 12px;
         font-size: 16px;
@@ -96,15 +118,16 @@
 }
 
 @media screen and (max-width: 768px) {
-    .searchForm-button {
+    .searchForm__button {
         width: 80px;
         height: 44px;
         top: 7px;
+        right: 7px;
     }
 }
 
 @media screen and (max-width: 768px) {
-    .searchForm-active {
+    .searchForm__active {
         margin-top: 30px;
     }
 }

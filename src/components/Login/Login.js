@@ -1,29 +1,94 @@
-import './Login.css';
-import logo from '../../images/logo.svg';
-import { Link } from 'react-router-dom';
-import React from 'react';
+import "./Login.css";
+import logo from "../../images/logo.svg";
+import { Link } from "react-router-dom";
+import Preloader from "../Preloader/Preloader";
+import React, { useEffect, useCallback } from "react";
 
-const Login = () => {
-    return (
-        <section className='login'>
-            <div className='login-conteiner'>
-                <img className='login-svg' alt='logo' src={logo} />
-                <h1 className='login-title'>Рады видеть!</h1>
-                <form className='form'>
-                    <label className='form-label'>E-mail</label>
-                    <input className='form-input'></input>
-                    <label className='form-label'>Пароль</label>
-                    <input className='form-input'></input>
-                    <span id="form-err" className="form-error">Что-то пошло не так...</span>
-                </form>
-                <button className='login-button'>Войти</button>
-                <div className='login-footer'>
-                    <p className='login-text'>Ещё не зарегистрированы?</p>
-                    <Link className='login-link' to='/signup'>Регистрация</Link>
-                </div>
-            </div>
-        </section>
-    )
-}
+const Login = (props) => {
+  const [values, setValues] = React.useState({});
+  const [errors, setErrors] = React.useState({});
+  const [isValid, setIsValid] = React.useState(false);
 
-export default Login
+  const handleChange = (event) => {
+    const target = event.target;
+    const name = target.name;
+    const value = target.value;
+    setValues({ ...values, [name]: value });
+    setErrors({ ...errors, [name]: target.validationMessage });
+    setIsValid(target.closest("form").checkValidity());
+  };
+
+  const resetForm = useCallback(
+    (newValues = {}, newErrors = {}, newIsValid = false) => {
+      setValues(newValues);
+      setErrors(newErrors);
+      setIsValid(newIsValid);
+    },
+    [setValues, setErrors, setIsValid]
+  );
+
+  useEffect(() => {
+    resetForm();
+  }, [resetForm]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    props.onLoginInfo({ ...values });
+  };
+
+  return (
+    <section className="login">
+      <div className="login__conteiner">
+        <img className="login__svg" alt="logo" src={logo} />
+        <h1 className="login__title">Рады видеть!</h1>
+        <form className="form" onSubmit={handleSubmit}>
+          <label className="form__label">E-mail</label>
+          <input
+            className="form__input"
+            id="email"
+            name="email"
+            type="email"
+            required
+            onChange={handleChange}
+          />
+          <span id="email" className="form__error">
+            {errors.email}
+          </span>
+          <label className="form__label">Пароль</label>
+          <input
+            id="password"
+            className="form__input"
+            name="password"
+            required
+            onChange={handleChange}
+          />
+          <span id="password" className="form__error">
+            {errors.password}
+          </span>
+          <span
+            id="form-err"
+            className={props.error ? "form__error" : "form__error_hide"}
+          >
+            Что-то пошло не так...
+          </span>
+          {props.isLoading ? (
+            <Preloader isLoading={props.isLoading} />
+          ) : <button
+            className={isValid ? "login__button" : "unvalible"}
+            disabled={isValid ? false : true}
+          >
+            Войти
+          </button>}
+        </form>
+        <div className="login__footer">
+          <p className="login__text">Ещё не зарегистрированы?</p>
+          <Link className="login__link" to="/signup">
+            Регистрация
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Login;

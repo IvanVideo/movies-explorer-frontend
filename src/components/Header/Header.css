@@ -27,51 +27,20 @@
     display: none;
 }
 
-.header-content {
+.header__content {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.header-burgerMenu {
-    position: absolute;
-    background-color: #000;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    top: 10px;
+.header__burger {
+    background-image: url(../../images/icon__COLOR_icon-main.svg);
+    background-repeat: no-repeat;
+    width: 44px;
+    height: 44px;
 }
 
-.header-burger {
-    display: block;
-    position: relative;
-    width: 28px;
-    height: 23px;
-}
-
-.header-burger:hover {
-    cursor: pointer;
-}
-
-.header-burger::before,
-.header-burger::after {
-    content: '';
-    position: absolute;
-    background-color: #000;
-    width: 100%;
-    height: 2px;
-    left: 0;
-}
-
-.header-burger::before {
-    top: 0;
-}
-
-.header-burger::after {
-    bottom: 0;
-}
-
-.header-burgerText {
+.header__burgerText {
     position: absolute;
     z-index: 10;
     margin: 0;
@@ -98,32 +67,23 @@
     top: 259px;
 }
 
-.header-close {
+.header__close {
     position: absolute;
     z-index: 10;
     top: 22px;
     right: 22px;
 }
 
-.header-close:hover {
+.header__close:hover {
     cursor: pointer;
 }
 
-.header-profileBurger {
-    width: 100px;
-    height: 32px;
-    position: absolute;
-    z-index: 10;
-    top: 909px;
-    right: 210px;
-}
-
-.header-box {
+.header__box {
     display: flex;
     align-items: center;
 }
 
-.header-link {
+.header__link {
     text-decoration: none;
     color: black;
     font-family: 'Inter', 'Arial', 'Helvetica';
@@ -141,7 +101,7 @@
     margin-left: 16px;
 }
 
-.header-link {
+.header__link {
     font-family: 'Inter', 'Arial', 'Helvetica';
     font-weight: 500;
     font-size: 12px;
@@ -151,25 +111,31 @@
     color: black;
 }
 
-.header-profile {
+.header__profile {
     width: 100px;
     height: 32px;
 }
 
 @media screen and (max-width: 1280px) {
-    .header-profile {
+    .header__profile {
         display: none;
     }
 }
 
 @media screen and (max-width: 1280px) {
-    .header-link {
+    .header__link {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 1281px) {
+    .header__burger {
         display: none;
     }
 }
 
 @media screen and (max-width: 768px) {
-    .header-link {
+    .header__link {
         font-size: 10px;
     }
 }

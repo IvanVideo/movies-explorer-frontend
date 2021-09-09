@@ -4,7 +4,7 @@
     background-color: #F5F5F5;
 }
 
-.navTab-link {
+.navTab__link {
     font-family: 'Inter', 'Arial', 'Helvetica';
     font-weight: 500;
     font-size: 13px;
@@ -13,16 +13,16 @@
     margin: 24px 40px 24px 0;
 }
 
-.navTab-link:hover {
+.navTab__link:hover {
     opacity: 0.7;
 }
 
-.navTab-link:last-child {
+.navTab__link:last-child {
     margin-right: 0;
 }
 
 @media screen and (max-width: 768px) {
-    .navTab-link {
+    .navTab__link {
         margin-right: 24px;
         font-size: 11px;
     }

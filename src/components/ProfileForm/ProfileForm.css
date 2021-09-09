@@ -1,0 +1,97 @@
+.profileForm {
+    height: 60px;
+    max-width: 205px;
+    position: relative;
+}
+
+.profileForm__input {
+    font-family: 'Inter', 'Arial', 'Helvetica';
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 13px;
+    width: 100%;
+    padding: 0;
+    height: 25px;
+    border: none;
+    text-align: right;
+}
+
+.profileForm__input:focus {
+    outline: none;
+}
+
+.form__line {
+    margin: 4px 0;
+    width: 100%;
+    height: 1px;
+    border: none;
+    background-color: #E8E8E8;
+}
+
+.propfile__name {
+    position: absolute;
+    top: 0px;
+    right: -170px;
+    width: 150px;
+}
+
+.propfile__email {
+    position: absolute;
+    top: 30px;
+    right: -220px;
+    width: 200px;
+}
+
+.profile__preloader {
+    position: absolute;
+    top: 100px;
+    left: -170px;
+}
+
+.profile__notice {
+    font-family: 'Inter', 'Arial', 'Helvetica';
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px; 
+    max-width: 300px;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.first {
+    position: relative;
+}
+
+.profile__notice_position {
+    position: absolute;
+    max-width: 300px;
+    width: 100%;
+    top: 150px;
+    left: 50px;
+}
+
+.unvisible {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .propfile__name {
+        top: -30px;
+        right: -30px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .propfile__email {
+        top: 60px;
+        right: 0px;
+        text-align: right;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .profile__notice_position {
+        left: 60px;
+    }
+}

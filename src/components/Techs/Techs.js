@@ -7,17 +7,17 @@ const Techs = () => {
             <div className='conteiner'>
                 <p className='title'>Технологии</p>
                 <hr className='line' />
-                <div className='conteiner-techs'>
-                    <h2 className='techs-title'>7 технологий</h2>
-                    <p className='techs-about'>На курсе веб-разработки мы освоили технологии, которые применили в дипломном проекте.</p>
-                    <section className='techs-stack'>
-                        <div className='techs-item'>HTML</div>
-                        <div className='techs-item'>CSS</div>
-                        <div className='techs-item'>JS</div>
-                        <div className='techs-item'>React</div>
-                        <div className='techs-item'>Git</div>
-                        <div className='techs-item'>Express.js</div>
-                        <div className='techs-item'>mongoDB</div>
+                <div className='conteiner__techs'>
+                    <h2 className='techs__title'>7 технологий</h2>
+                    <p className='techs__about'>На курсе веб-разработки мы освоили технологии, которые применили в дипломном проекте.</p>
+                    <section className='techs__stack'>
+                        <div className='techs__item'>HTML</div>
+                        <div className='techs__item'>CSS</div>
+                        <div className='techs__item'>JS</div>
+                        <div className='techs__item'>React</div>
+                        <div className='techs__item'>Git</div>
+                        <div className='techs__item'>Express.js</div>
+                        <div className='techs__item'>mongoDB</div>
                     </section>
                 </div>
             </div>
