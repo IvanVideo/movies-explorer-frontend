@@ -1,7 +1,7 @@
 # movies-explorer-frontend
 ### дипломный проект
 
-***Cтек технологий проекта***
+***Cтек технологий проекта***  
 ![Node.js](https://img.shields.io/badge/-html5-cae3fa?style=for-the-badge&logo=node.js@logoColor=00eeff) ![JavaScript](https://img.shields.io/badge/-CSS-cae3fa?style=for-the-badge&logo=javascript@logoColor=00eeff) ![React](https://img.shields.io/badge/-JavaScript-cae3fa?style=for-the-badge&logo=react@logoColor=00eeff) ![Git](https://img.shields.io/badge/-react-cae3fa?style=for-the-badge&logo=git@logoColor=00eeff) ![Figma](https://img.shields.io/badge/-git-cae3fa?style=for-the-badge&logo=figma@logoColor=00eeff) ![Photoshop](https://img.shields.io/badge/-express.js-cae3fa?style=for-the-badge&logo=photoshop) ![Photoshop](https://img.shields.io/badge/-mongoDB-cae3fa?style=for-the-badge&logo=photoshop)
 
 Данный проект является упрощенной моделью онлайн кинотеатра.
