@@ -47,7 +47,6 @@ const ProfileForm = (props) => {
 
   useEffect(() => {
     resetForm();
-    props.check(values);
   }, [resetForm]);
 
   const handleSubmitForm = (e) => {
@@ -57,6 +56,7 @@ const ProfileForm = (props) => {
     } else {
       e.preventDefault();
       props.userValues({ ...values });
+      props.changeStatus();
     }
   };
 

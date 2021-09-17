@@ -4,6 +4,7 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 const MoviesCard = (props) => {
   const [isLiked, setIsLiked] = React.useState(false);
+  const [userFilms, setUserFilms] = React.useState([]);
   const hours = Math.trunc(props.card.duration / 60);
   const minutes = props.card.duration % 60;
   const currentUser = React.useContext(CurrentUserContext);

@@ -13,7 +13,7 @@ const Profile = (props) => {
 
     useEffect(() => {
         setname(currentUser.name)
-    })
+    }, [isActive, currentUser])
 
     const changeStatus = () => {
         setIsActive(!isActive)
@@ -25,7 +25,7 @@ const Profile = (props) => {
             <div className='profile__conteiner'>
                 <h1 className='profile__title'>Привет, {currentUser.name}!</h1>
                 <div className='profile__content'>
-                    {isActive ? <ProfileForm userInfo={props.userInfo} userValues={props.updateUserInfo} isLoading={props.isLoading} success={props.success} check={check} name={name} /> :
+                    {isActive ? <ProfileForm userInfo={props.userInfo} userValues={props.updateUserInfo} isLoading={props.isLoading} success={props.success} name={name} changeStatus={changeStatus} /> :
                         <>
                             <div className='profile__box first'>
                                 <p className='profile__name left'>Имя</p>
