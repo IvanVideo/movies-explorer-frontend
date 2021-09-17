@@ -33,8 +33,6 @@
 ###### Аккаунт залогированного пользователя
 ![](https://sun9-50.userapi.com/impg/IKeZF8h4mTUA1Q3V1F_oklXlcbF5oioLDZl42g/7Bj4PG-5Iu0.jpg?size=800x530&quality=96&sign=4214f5ae089ea2911a76a7064fee5ad3&type=album)
 
-###### Аккаунт залогированного пользователя
-![](https://sun9-50.userapi.com/impg/IKeZF8h4mTUA1Q3V1F_oklXlcbF5oioLDZl42g/7Bj4PG-5Iu0.jpg?size=800x530&quality=96&sign=4214f5ae089ea2911a76a7064fee5ad3&type=album)
 
 ###### Главная страница проекта
 ![](https://sun9-84.userapi.com/impg/sdFkFVSwFC63LFT00ZC4QcNYh0UD9Bj3a66aUg/FcxZ1z-IC9Q.jpg?size=800x450&quality=96&sign=b48c18cc33ad0d9e225010965408b812&type=album)
