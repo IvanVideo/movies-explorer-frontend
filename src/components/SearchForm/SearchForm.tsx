@@ -3,29 +3,35 @@ import React, { useEffect } from "react";
 import checkbox from "../../images/check.svg";
 import checkbox2 from "../../images/black.svg";
 
-const SearchForm = (props) => {
+interface SearchFormProps {
+  enterValue: Function,
+  enterValueSaved: Function,
+  shortFilmsStatus: Function,
+}
+
+const SearchForm = ({enterValue, enterValueSaved, shortFilmsStatus }: SearchFormProps) => {
   const [inputValue, setInputValue] = React.useState("");
   const [checkboxState, setCheckboxState] = React.useState(false);
   const [status, setStatus] = React.useState(false);
 
-  const handleChangeInputValue = (e) => {
-    setInputValue(e.target.value);
+  const handleChangeInputValue = (e: React.FormEvent) => {
+    // setInputValue(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (inputValue == "") {
       setStatus(true);
     } else {
       setStatus(false);
-      props.enterValue(inputValue);
-      props.enterValueSaved(inputValue);
+      enterValue(inputValue);
+      enterValueSaved(inputValue);
     }
   };
 
   const handleShortFilmsClick = () => {
     setCheckboxState(!checkboxState);
-    props.shortFilmsStatus(checkboxState);
+    shortFilmsStatus(checkboxState);
   };
 
   return (
