@@ -8,7 +8,7 @@ const Profile = (props) => {
     const [isActive, setIsActive] = React.useState(false);
     const currentUser = React.useContext(CurrentUserContext);
     const [name, setname] = React.useState('');
-
+    
     localStorage.setItem("url", location.pathname);
 
     useEffect(() => {
